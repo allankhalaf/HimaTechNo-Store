@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Settings - HimaTech-Store Admin Dashboard">
+    <title>Settings-Admin</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --secondary-color: #7c3aed;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --dark-color: #1e293b;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --sidebar-width: 280px;
+            --sidebar-collapsed: 80px;
+            --header-height: 70px;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-800);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--gray-600); border-radius: 4px; }
+        .sidebar.collapsed { width: var(--sidebar-collapsed); }
+
+        .sidebar-brand {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-brand-icon {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-brand-text {
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .sidebar.collapsed .sidebar-brand-text { opacity: 0; width: 0; }
+
+        .sidebar-toggle {
+            position: absolute;
+            top: 24px; right: -14px;
+            width: 28px; height: 28px;
+            background: var(--primary-color);
+            border: 2px solid white;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1001;
+            transition: transform var(--transition-speed);
+        }
+
+        .sidebar.collapsed .sidebar-toggle { transform: rotate(180deg); }
+
+        .sidebar-menu { padding: 16px 12px; }
+
+        .sidebar-menu-title {
+            color: var(--gray-400);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .sidebar.collapsed .sidebar-menu-title { opacity: 0; }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--gray-400);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(255,255,255,0.06);
+            color: white;
+        }
+
+        .sidebar-item.active {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+
+        .sidebar-item i {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .sidebar-item-text {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .sidebar.collapsed .sidebar-item-text { opacity: 0; width: 0; }
+
+        .sidebar-badge {
+            margin-left: auto;
+            background: var(--danger-color);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .sidebar.collapsed .sidebar-badge {
+            position: absolute;
+            top: 8px; right: 8px;
+            padding: 3px;
+            min-width: 16px; height: 16px;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 16px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .sidebar-user-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.2);
+            flex-shrink: 0;
+        }
+
+        .sidebar-user-info {
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+
+        .sidebar.collapsed .sidebar-user-info { opacity: 0; width: 0; }
+
+        .sidebar-user-name {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .sidebar-user-role {
+            color: var(--gray-400);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: margin-left var(--transition-speed) ease;
+        }
+
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-collapsed); }
+
+        /* ===== HEADER ===== */
+        .admin-header {
+            height: var(--header-height);
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-search {
+            position: relative;
+            width: 360px;
+        }
+
+        .header-search input {
+            width: 100%;
+            padding: 10px 16px 10px 44px;
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            background: var(--gray-50);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .header-search input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .header-search i {
+            position: absolute;
+            left: 16px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            font-size: 16px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header-btn {
+            width: 42px; height: 42px;
+            border-radius: 10px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .header-btn:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-300);
+            color: var(--gray-800);
+        }
+
+        .header-btn .badge {
+            position: absolute;
+            top: -2px; right: -2px;
+            background: var(--danger-color);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-divider {
+            width: 1px; height: 32px;
+            background: var(--gray-200);
+            margin: 0 4px;
+        }
+
+        .header-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .header-profile:hover { background: var(--gray-50); }
+
+        .header-profile img {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header-profile-info { text-align: left; }
+
+        .header-profile-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray-800);
+        }
+
+        .header-profile-role {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        /* ===== PAGE CONTENT ===== */
+        .page-content { padding: 28px; }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .page-subtitle {
+            color: var(--gray-500);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 12px 20px;
+            margin-bottom: 0;
+            border: 1px solid var(--gray-200);
+        }
+
+        .breadcrumb-item a {
+            color: var(--gray-500);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-item a:hover { color: var(--primary-color); }
+
+        .breadcrumb-item.active {
+            color: var(--gray-800);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .breadcrumb-item + .breadcrumb-item::before {
+            color: var(--gray-400);
+        }
+
+        /* ===== SETTINGS CARD ===== */
+        .settings-card {
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .settings-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .settings-card-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .settings-card-icon.blue { background: var(--primary-light); color: var(--primary-color); }
+        .settings-card-icon.purple { background: #ede9fe; color: var(--secondary-color); }
+        .settings-card-icon.green { background: #d1fae5; color: var(--success-color); }
+        .settings-card-icon.orange { background: #fef3c7; color: var(--warning-color); }
+        .settings-card-icon.red { background: #fee2e2; color: var(--danger-color); }
+        .settings-card-icon.cyan { background: #cffafe; color: var(--info-color); }
+
+        .settings-card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .settings-card-desc {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        .settings-card-body { padding: 24px; }
+
+        /* ===== FORM STYLES ===== */
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 8px;
+        }
+
+        .form-control, .form-select {
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-size: 14px;
+            color: var(--gray-800);
+            transition: all 0.2s;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-control.is-invalid { border-color: var(--danger-color); }
+        .form-control.is-valid { border-color: var(--success-color); }
+
+        .invalid-feedback {
+            font-size: 13px;
+            color: var(--danger-color);
+        }
+
+        .form-text {
+            font-size: 12px;
+            color: var(--gray-400);
+        }
+
+        .input-group-text {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            color: var(--gray-500);
+            font-size: 14px;
+        }
+
+        /* ===== TOGGLE SWITCH ===== */
+        .form-check-input {
+            width: 44px;
+            height: 24px;
+            cursor: pointer;
+            background-color: var(--gray-300);
+            border: none;
+            border-radius: 12px;
+            transition: background-color 0.2s;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+        }
+
+        .form-check-input:focus {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .form-check-label {
+            font-size: 14px;
+            color: var(--gray-700);
+            font-weight: 500;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        /* ===== AVATAR UPLOAD ===== */
+        .avatar-upload {
+            position: relative;
+            display: inline-block;
+        }
+
+        .avatar-preview {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gray-200);
+        }
+
+        .avatar-upload-btn {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 36px; height: 36px;
+            background: var(--primary-color);
+            border: 3px solid white;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .avatar-upload-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        /* ===== COLOR PICKER ===== */
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .color-picker-input {
+            width: 48px; height: 48px;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            cursor: pointer;
+            padding: 2px;
+        }
+
+        .color-picker-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-700);
+            font-family: monospace;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border: none;
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--gray-200);
+            background: white;
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-600);
+            transition: all 0.2s;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--gray-50);
+            color: var(--gray-800);
+        }
+
+        .btn-danger-custom {
+            background: linear-gradient(135deg, var(--danger-color), #dc2626);
+            border: none;
+            border-radius: 10px;
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            transition: all 0.2s;
+        }
+
+        .btn-danger-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+            color: white;
+        }
+
+        /* ===== SETTINGS NAV TABS ===== */
+        .settings-nav {
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .settings-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 20px;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .settings-nav-item:hover {
+            background: var(--gray-50);
+            color: var(--gray-800);
+        }
+
+        .settings-nav-item.active {
+            background: var(--primary-light);
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .settings-nav-item i {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* ===== SETTINGS TAB CONTENT ===== */
+        .settings-tab-content {
+            display: none;
+        }
+
+        .settings-tab-content.active {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        /* ===== DANGER ZONE ===== */
+        .danger-zone {
+            border: 1px solid #fecaca;
+            background: #fef2f2;
+            border-radius: var(--border-radius);
+            padding: 24px;
+        }
+
+        .danger-zone-title {
+            color: var(--danger-color);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .danger-zone-desc {
+            color: #b91c1c;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.mobile-open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .sidebar.collapsed ~ .main-content { margin-left: 0; }
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            .mobile-overlay.active { display: block; }
+            .header-search { width: 200px; }
+        }
+
+        @media (max-width: 576px) {
+            .page-content { padding: 16px; }
+            .page-title { font-size: 22px; }
+            .admin-header { padding: 0 16px; }
+            .header-search { display: none; }
+            .header-profile-info { display: none; }
+            .settings-card-body { padding: 16px; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in { animation: fadeInUp 0.5s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--gray-100); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+    </style>
+
+</head>
+<body>
+
+<!-- Mobile Overlay -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-toggle" id="sidebarToggle">
+        <i class="bi bi-chevron-left"></i>
+    </div>
+
+    <div class="sidebar-brand">
+        <div class="sidebar-brand-icon">
+            <i class="bi bi-cpu"></i>
+        </div>
+        <span class="sidebar-brand-text">HimaTech</span>
+    </div>
+
+    <nav class="sidebar-menu">
+        <div class="sidebar-menu-title">Main</div>
+
+        <a href="dashboard.html" class="sidebar-item">
+            <i class="bi bi-grid-1x2-fill"></i>
+            <span class="sidebar-item-text">Dashboard</span>
+        </a>
+
+        <a href="orders.html" class="sidebar-item">
+            <i class="bi bi-bag-check"></i>
+            <span class="sidebar-item-text">Orders</span>
+            <span class="sidebar-badge">24</span>
+        </a>
+
+        <a href="products.html" class="sidebar-item">
+            <i class="bi bi-box-seam"></i>
+            <span class="sidebar-item-text">Products</span>
+        </a>
+
+        <a href="customers.html" class="sidebar-item">
+            <i class="bi bi-people"></i>
+            <span class="sidebar-item-text">Customers</span>
+        </a>
+
+        <div class="sidebar-menu-title">Management</div>
+
+        <a href="categories.html" class="sidebar-item">
+            <i class="bi bi-tags"></i>
+            <span class="sidebar-item-text">Categories</span>
+        </a>
+
+        <a href="inventory.html" class="sidebar-item">
+            <i class="bi bi-archive"></i>
+            <span class="sidebar-item-text">Inventory</span>
+        </a>
+
+        <a href="reviews.html" class="sidebar-item">
+            <i class="bi bi-star"></i>
+            <span class="sidebar-item-text">Reviews</span>
+            <span class="sidebar-badge">8</span>
+        </a>
+
+        <div class="sidebar-menu-title">Finance</div>
+
+        <a href="transactions.html" class="sidebar-item">
+            <i class="bi bi-credit-card"></i>
+            <span class="sidebar-item-text">Transactions</span>
+        </a>
+
+        <a href="reports.html" class="sidebar-item">
+            <i class="bi bi-graph-up-arrow"></i>
+            <span class="sidebar-item-text">Reports</span>
+        </a>
+
+        <div class="sidebar-menu-title">System</div>
+
+        <a href="settings.html" class="sidebar-item active">
+            <i class="bi bi-gear"></i>
+            <span class="sidebar-item-text">Settings</span>
+        </a>
+
+        <a href="../pages/index.html" class="sidebar-item" target="_blank">
+            <i class="bi bi-shop"></i>
+            <span class="sidebar-item-text">View Store</span>
+        </a>
+    </nav>
+
+   
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="header-search">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search orders, products, customers..." id="headerSearch">
+        </div>
+
+        <div class="header-actions">
+            <button class="header-btn" id="themeToggle" title="Toggle Theme">
+                <i class="bi bi-moon"></i>
+            </button>
+
+            <button class="header-btn" id="notificationsBtn" title="Notifications">
+                <i class="bi bi-bell"></i>
+                <span class="badge">5</span>
+            </button>
+
+            <button class="header-btn d-lg-none" id="mobileMenuBtn" title="Menu">
+                <i class="bi bi-list"></i>
+            </button>
+
+            <div class="header-divider d-none d-md-block"></div>
+
+            <div class="header-profile" id="profileDropdown">
+                <img src="../images/wishlist/ahmad.jpeg" 
+                     alt="Admin"
+                     onerror="this.src='https://via.placeholder.com/80x80/2563eb/ffffff?text=AD'">
+                <div class="header-profile-info d-none d-md-block">
+                    <div class="header-profile-name">Ahmad Darwish</div>
+                    <div class="header-profile-role">Super Admin</div>
+                </div>
+                <i class="bi bi-chevron-down d-none d-md-block" style="color: var(--gray-400); font-size: 12px;"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-content">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="dashboard.html"><i class="bi bi-house-door me-1"></i>Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Settings</li>
+                </ol>
+            </nav>
+        </div>
+
+        <h1 class="page-title animate-fade-in">Settings</h1>
+        <p class="page-subtitle animate-fade-in">Manage your store settings, profile, and preferences.</p>
+
+        <div class="row">
+            <!-- Settings Navigation -->
+            <div class="col-lg-3 col-md-4 mb-4">
+                <div class="settings-nav animate-fade-in">
+                    <button class="settings-nav-item active" data-tab="profile">
+                        <i class="bi bi-person"></i>
+                        <span>Profile Settings</span>
+                    </button>
+                    <button class="settings-nav-item" data-tab="store">
+                        <i class="bi bi-shop"></i>
+                        <span>Store Settings</span>
+                    </button>
+                    <button class="settings-nav-item" data-tab="notifications">
+                        <i class="bi bi-bell"></i>
+                        <span>Notifications</span>
+                    </button>
+                    <button class="settings-nav-item" data-tab="security">
+                        <i class="bi bi-shield-lock"></i>
+                        <span>Security</span>
+                    </button>
+                    <button class="settings-nav-item" data-tab="appearance">
+                        <i class="bi bi-palette"></i>
+                        <span>Appearance</span>
+                    </button>
+                    <button class="settings-nav-item" data-tab="advanced">
+                        <i class="bi bi-sliders"></i>
+                        <span>Advanced</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="col-lg-9 col-md-8">
+                <!-- Profile Settings Tab -->
+                <div class="settings-tab-content active" id="tab-profile">
+                    <div class="settings-card animate-fade-in">
+                        <div class="settings-card-header">
+                            <div class="settings-card-icon blue">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <div>
+                                <div class="settings-card-title">Profile Information</div>
+                                <div class="settings-card-desc">Update your personal information and profile picture.</div>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <form id="profileForm" novalidate>
+                                <div class="text-center mb-4">
+                                    <div class="avatar-upload">
+                                        <img src="../images/wishlist/ahmad.jpeg" 
+                                             alt="Profile" 
+                                             class="avatar-preview"
+                                             id="avatarPreview"
+                                             onerror="this.src='https://via.placeholder.com/120x120/2563eb/ffffff?text=AD'">
+                                        <label for="avatarInput" class="avatar-upload-btn" title="Change Photo">
+                                            <i class="bi bi-camera"></i>
+                                        </label>
+                                        <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                                    </div>
+                                    <p class="form-text mt-2">Recommended: 400x400px, max 2MB</p>
+                                </div>
+
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">First Name</label>
+                                        <input type="text" class="form-control" id="firstName" value="Ahmad" required>
+                                        <div class="invalid-feedback">Please enter your first name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Last Name</label>
+                                        <input type="text" class="form-control" id="lastName" value="Darwish" required>
+                                        <div class="invalid-feedback">Please enter your last name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email Address</label>
+                                        <input type="email" class="form-control" id="email" value="ahmad@himatech-store.com" required>
+                                        <div class="invalid-feedback">Please enter a valid email address.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control" id="phone" value="+963 991 234 567" required>
+                                        <div class="invalid-feedback">Please enter a valid phone number.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Bio</label>
+                                        <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself...">Store Administrator at HimaTech-Store. Managing tech products and customer relations since 2024.</textarea>
+                                        <div class="form-text">Maximum 500 characters.</div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-lg me-1"></i>Save Changes
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-custom">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Store Settings Tab -->
+                <div class="settings-tab-content" id="tab-store">
+                    <div class="settings-card animate-fade-in">
+                        <div class="settings-card-header">
+                            <div class="settings-card-icon purple">
+                                <i class="bi bi-shop"></i>
+                            </div>
+                            <div>
+                                <div class="settings-card-title">Store Information</div>
+                                <div class="settings-card-desc">Configure your store details and business information.</div>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <form id="storeForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Store Name</label>
+                                        <input type="text" class="form-control" id="storeName" value="HimaTech-Store" required>
+                                        <div class="invalid-feedback">Please enter your store name.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Store Email</label>
+                                        <input type="email" class="form-control" id="storeEmail" value="info@himatech-store.com" required>
+                                        <div class="invalid-feedback">Please enter a valid email.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Store Phone</label>
+                                        <input type="tel" class="form-control" id="storePhone" value="+963 11 234 5678" required>
+                                        <div class="invalid-feedback">Please enter a valid phone number.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Currency</label>
+                                        <select class="form-select" id="currency">
+                                            <option value="USD" selected>USD - US Dollar ($)</option>
+                                            <option value="EUR">EUR - Euro (&euro;)</option>
+                                            <option value="GBP">GBP - British Pound (&pound;)</option>
+                                            <option value="SYP">SYP - Syrian Pound (LS)</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Store Address</label>
+                                        <textarea class="form-control" id="storeAddress" rows="2" required>Damascus, Syria</textarea>
+                                        <div class="invalid-feedback">Please enter your store address.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Tax Rate (%)</label>
+                                        <input type="number" class="form-control" id="taxRate" value="0" min="0" max="100" step="0.01">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Shipping Base Cost ($)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" id="shippingCost" value="5.00" min="0" step="0.01">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-lg me-1"></i>Save Changes
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-custom">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notifications Tab -->
+                <div class="settings-tab-content" id="tab-notifications">
+                    <div class="settings-card animate-fade-in">
+                        <div class="settings-card-header">
+                            <div class="settings-card-icon green">
+                                <i class="bi bi-bell"></i>
+                            </div>
+                            <div>
+                                <div class="settings-card-title">Notification Preferences</div>
+                                <div class="settings-card-desc">Choose how and when you want to be notified.</div>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <form id="notificationsForm">
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Email Notifications</h6>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">New Orders</div>
+                                        <div class="form-text mb-0">Receive an email when a new order is placed.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailNewOrders" checked>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Order Updates</div>
+                                        <div class="form-text mb-0">Receive updates when order status changes.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailOrderUpdates" checked>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">New Customers</div>
+                                        <div class="form-text mb-0">Get notified when a new customer registers.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailNewCustomers">
+                                    </div>
+                                </div>
+                                <div class="mb-4 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Low Stock Alerts</div>
+                                        <div class="form-text mb-0">Receive alerts when products are running low.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="emailLowStock" checked>
+                                    </div>
+                                </div>
+
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Push Notifications</h6>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Browser Notifications</div>
+                                        <div class="form-text mb-0">Show browser push notifications.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="pushNotifications" checked>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Sound Alerts</div>
+                                        <div class="form-text mb-0">Play a sound when notifications arrive.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="soundAlerts">
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-lg me-1"></i>Save Preferences
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-custom">Reset to Default</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Tab -->
+                <div class="settings-tab-content" id="tab-security">
+                    <div class="settings-card animate-fade-in">
+                        <div class="settings-card-header">
+                            <div class="settings-card-icon red">
+                                <i class="bi bi-shield-lock"></i>
+                            </div>
+                            <div>
+                                <div class="settings-card-title">Security Settings</div>
+                                <div class="settings-card-desc">Manage your password and account security.</div>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <form id="passwordForm" novalidate>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label">Current Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="currentPassword" required>
+                                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="currentPassword">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">Please enter your current password.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">New Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="newPassword" required minlength="8">
+                                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="newPassword">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                                        <div class="form-text">Use at least 8 characters with letters, numbers, and symbols.</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Confirm New Password</label>
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" id="confirmPassword" required>
+                                            <button type="button" class="btn btn-outline-secondary toggle-password" data-target="confirmPassword">
+                                                <i class="bi bi-eye"></i>
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">Passwords do not match.</div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-lg me-1"></i>Update Password
+                                    </button>
+                                </div>
+                            </form>
+
+                            <hr class="my-4">
+
+                            <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Two-Factor Authentication</h6>
+                            <div class="d-flex align-items-center justify-content-between p-3 rounded-3 mb-3" style="background: var(--gray-50);">
+                                <div>
+                                    <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Enable 2FA</div>
+                                    <div class="form-text mb-0">Add an extra layer of security to your account.</div>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="enable2FA">
+                                </div>
+                            </div>
+
+                            <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Login Sessions</h6>
+                            <div class="p-3 rounded-3 mb-2" style="background: var(--gray-50);">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <i class="bi bi-laptop fs-4" style="color: var(--gray-400);"></i>
+                                        <div>
+                                            <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Current Session</div>
+                                            <div class="form-text mb-0">Damascus, Syria &bull; Chrome on Windows</div>
+                                        </div>
+                                    </div>
+                                    <span class="badge bg-success">Active</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-outline-custom btn-sm" id="logoutAllSessions">
+                                <i class="bi bi-box-arrow-right me-1"></i>Logout All Other Sessions
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appearance Tab -->
+                <div class="settings-tab-content" id="tab-appearance">
+                    <div class="settings-card animate-fade-in">
+                        <div class="settings-card-header">
+                            <div class="settings-card-icon cyan">
+                                <i class="bi bi-palette"></i>
+                            </div>
+                            <div>
+                                <div class="settings-card-title">Appearance</div>
+                                <div class="settings-card-desc">Customize the look and feel of your admin panel.</div>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <form id="appearanceForm">
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Theme</h6>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-4">
+                                        <div class="p-3 rounded-3 text-center cursor-pointer border border-2 border-primary" style="background: white; cursor: pointer;" id="themeLight">
+                                            <div class="mb-2 p-3 rounded-2" style="background: var(--gray-50);">
+                                                <div class="bg-white rounded-1 mb-1" style="height: 8px;"></div>
+                                                <div class="bg-white rounded-1" style="height: 8px; width: 60%;"></div>
+                                            </div>
+                                            <div class="fw-semibold" style="font-size: 13px;">Light</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 rounded-3 text-center cursor-pointer border border-2" style="background: #1e293b; cursor: pointer; border-color: transparent;" id="themeDark">
+                                            <div class="mb-2 p-3 rounded-2" style="background: #334155;">
+                                                <div class="rounded-1 mb-1" style="height: 8px; background: #475569;"></div>
+                                                <div class="rounded-1" style="height: 8px; width: 60%; background: #475569;"></div>
+                                            </div>
+                                            <div class="fw-semibold" style="font-size: 13px; color: white;">Dark</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 rounded-3 text-center cursor-pointer border border-2" style="background: white; cursor: pointer; border-color: transparent;" id="themeAuto">
+                                            <div class="mb-2 p-3 rounded-2" style="background: linear-gradient(90deg, var(--gray-50) 50%, #334155 50%);">
+                                                <div class="bg-white rounded-1 mb-1" style="height: 8px;"></div>
+                                                <div class="rounded-1" style="height: 8px; width: 60%; background: #475569;"></div>
+                                            </div>
+                                            <div class="fw-semibold" style="font-size: 13px;">Auto</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Primary Color</h6>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-md-6">
+                                        <label class="form-label">Brand Color</label>
+                                        <div class="color-picker-wrapper">
+                                            <input type="color" class="color-picker-input" id="brandColor" value="#2563eb">
+                                            <span class="color-picker-value" id="brandColorValue">#2563eb</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Accent Color</label>
+                                        <div class="color-picker-wrapper">
+                                            <input type="color" class="color-picker-input" id="accentColor" value="#7c3aed">
+                                            <span class="color-picker-value" id="accentColorValue">#7c3aed</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Layout</h6>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Compact Sidebar</div>
+                                        <div class="form-text mb-0">Use a more compact sidebar layout.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="compactSidebar">
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Show Breadcrumbs</div>
+                                        <div class="form-text mb-0">Display breadcrumb navigation on pages.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="showBreadcrumbs" checked>
+                                    </div>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-lg me-1"></i>Save Appearance
+                                    </button>
+                                    <button type="reset" class="btn btn-outline-custom">Reset to Default</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Tab -->
+                <div class="settings-tab-content" id="tab-advanced">
+                    <div class="settings-card animate-fade-in">
+                        <div class="settings-card-header">
+                            <div class="settings-card-icon orange">
+                                <i class="bi bi-sliders"></i>
+                            </div>
+                            <div>
+                                <div class="settings-card-title">Advanced Settings</div>
+                                <div class="settings-card-desc">Configure advanced options for your store.</div>
+                            </div>
+                        </div>
+                        <div class="settings-card-body">
+                            <form id="advancedForm">
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Data Management</h6>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Auto Backup</div>
+                                        <div class="form-text mb-0">Automatically backup your store data daily.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="autoBackup" checked>
+                                    </div>
+                                </div>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Maintenance Mode</div>
+                                        <div class="form-text mb-0">Put your store in maintenance mode.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="maintenanceMode">
+                                    </div>
+                                </div>
+
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">API & Integrations</h6>
+                                <div class="row g-3 mb-4">
+                                    <div class="col-12">
+                                        <label class="form-label">API Key</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="apiKey" value="ht_live_xxxxxxxxxxxxxxxxxxxx" readonly>
+                                            <button type="button" class="btn btn-outline-secondary" id="regenerateApiKey">
+                                                <i class="bi bi-arrow-clockwise"></i> Regenerate
+                                            </button>
+                                            <button type="button" class="btn btn-outline-secondary" id="copyApiKey">
+                                                <i class="bi bi-clipboard"></i> Copy
+                                            </button>
+                                        </div>
+                                        <div class="form-text">Use this key to connect external services to your store.</div>
+                                    </div>
+                                </div>
+
+                                <h6 class="fw-bold mb-3" style="color: var(--gray-700); font-size: 14px;">Cache & Performance</h6>
+                                <div class="mb-3 d-flex align-items-center justify-content-between p-3 rounded-3" style="background: var(--gray-50);">
+                                    <div>
+                                        <div class="fw-semibold" style="font-size: 14px; color: var(--gray-800);">Enable Caching</div>
+                                        <div class="form-text mb-0">Cache product data for faster loading.</div>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="enableCache" checked>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <button type="button" class="btn btn-outline-custom" id="clearCache">
+                                        <i class="bi bi-trash me-1"></i>Clear Cache
+                                    </button>
+                                </div>
+
+                                <div class="mt-4 d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary-custom">
+                                        <i class="bi bi-check-lg me-1"></i>Save Advanced Settings
+                                    </button>
+                                </div>
+                            </form>
+
+                            <hr class="my-4">
+
+                            <!-- Danger Zone -->
+                            <div class="danger-zone">
+                                <div class="danger-zone-title">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    Danger Zone
+                                </div>
+                                <p class="danger-zone-desc">These actions are irreversible. Please proceed with caution.</p>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button type="button" class="btn btn-outline-danger" id="resetSettings" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                        <i class="bi bi-arrow-counterclockwise me-1"></i>Reset All Settings
+                                    </button>
+                                    <button type="button" class="btn btn-danger-custom" id="deleteAccount" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">
+                                        <i class="bi bi-trash me-1"></i>Delete Account
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
+
+<!-- Confirm Reset Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--border-radius); border: none;">
+            <div class="modal-header" style="border-bottom: 1px solid var(--gray-100);">
+                <h5 class="modal-title fw-bold" style="color: var(--gray-800);">
+                    <i class="bi bi-exclamation-triangle-fill text-warning me-2"></i>Confirm Reset
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <p style="color: var(--gray-600); font-size: 14px;">Are you sure you want to reset all settings to their default values? This action cannot be undone.</p>
+                <div class="mb-3">
+                    <label class="form-label" style="font-size: 13px;">Type <strong>RESET</strong> to confirm</label>
+                    <input type="text" class="form-control" id="confirmResetInput" placeholder="Type RESET">
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid var(--gray-100); padding: 16px 24px;">
+                <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger-custom" id="confirmResetBtn" disabled>Reset Settings</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Account Modal -->
+<div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: var(--border-radius); border: none;">
+            <div class="modal-header" style="border-bottom: 1px solid var(--gray-100);">
+                <h5 class="modal-title fw-bold" style="color: var(--danger-color);">
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>Delete Account
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding: 24px;">
+                <div class="alert alert-danger" style="background: #fef2f2; border-color: #fecaca; color: #991b1b; font-size: 14px;">
+                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                    <strong>Warning:</strong> This will permanently delete your account and all associated data. This action cannot be undone.
+                </div>
+                <p style="color: var(--gray-600); font-size: 14px;">To confirm, please type your email address below:</p>
+                <div class="mb-3">
+                    <label class="form-label" style="font-size: 13px;">Email Address</label>
+                    <input type="email" class="form-control" id="confirmDeleteEmail" placeholder="ahmad@himatech-store.com">
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top: 1px solid var(--gray-100); padding: 16px 24px;">
+                <button type="button" class="btn btn-outline-custom" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger-custom" id="confirmDeleteBtn" disabled>Delete Account</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // ===== SIDEBAR TOGGLE =====
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+    });
+
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+        mobileOverlay.classList.toggle('active');
+    });
+
+    mobileOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('mobile-open');
+        mobileOverlay.classList.remove('active');
+    });
+
+    if (localStorage.getItem('sidebarCollapsed') === 'true' && window.innerWidth > 991) {
+        sidebar.classList.add('collapsed');
+    }
+
+    // ===== SEARCH =====
+    const headerSearch = document.getElementById('headerSearch');
+    headerSearch.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+        if (query.length > 2) {
+            showToast('Searching for: ' + query, 'info');
+        }
+    });
+
+    headerSearch.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            showToast('Search results for: ' + this.value, 'info');
+        }
+    });
+
+    // ===== THEME TOGGLE =====
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = themeToggle.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.classList.replace('bi-moon', 'bi-sun');
+            showToast('Dark mode enabled', 'info');
+        } else {
+            icon.classList.replace('bi-sun', 'bi-moon');
+            showToast('Light mode enabled', 'info');
+        }
+    });
+
+    // ===== NOTIFICATIONS =====
+    const notificationsBtn = document.getElementById('notificationsBtn');
+    notificationsBtn.addEventListener('click', () => {
+        showToast('You have 5 new notifications', 'info');
+    });
+
+    // ===== SETTINGS TABS =====
+    const settingsNavItems = document.querySelectorAll('.settings-nav-item');
+    const settingsTabContents = document.querySelectorAll('.settings-tab-content');
+
+    settingsNavItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const tabId = item.getAttribute('data-tab');
+
+            settingsNavItems.forEach(nav => nav.classList.remove('active'));
+            item.classList.add('active');
+
+            settingsTabContents.forEach(content => {
+                content.classList.remove('active');
+                if (content.id === 'tab-' + tabId) {
+                    content.classList.add('active');
+                }
+            });
+        });
+    });
+
+    // ===== AVATAR UPLOAD =====
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarPreview = document.getElementById('avatarPreview');
+
+    avatarInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            if (file.size > 2 * 1024 * 1024) {
+                showToast('Image size must be less than 2MB', 'error');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                avatarPreview.src = e.target.result;
+                showToast('Profile picture updated', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // ===== FORM VALIDATION - Profile Form =====
+    const profileForm = document.getElementById('profileForm');
+    profileForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (this.checkValidity()) {
+            showToast('Profile information saved successfully!', 'success');
+        } else {
+            e.stopPropagation();
+            this.classList.add('was-validated');
+            showToast('Please fill in all required fields correctly.', 'error');
+        }
+    });
+
+    // ===== FORM VALIDATION - Store Form =====
+    const storeForm = document.getElementById('storeForm');
+    storeForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (this.checkValidity()) {
+            showToast('Store settings saved successfully!', 'success');
+        } else {
+            e.stopPropagation();
+            this.classList.add('was-validated');
+            showToast('Please fill in all required fields correctly.', 'error');
+        }
+    });
+
+    // ===== FORM VALIDATION - Notifications Form =====
+    const notificationsForm = document.getElementById('notificationsForm');
+    notificationsForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast('Notification preferences saved!', 'success');
+    });
+
+    // ===== FORM VALIDATION - Password Form =====
+    const passwordForm = document.getElementById('passwordForm');
+    passwordForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const newPassword = document.getElementById('newPassword');
+        const confirmPassword = document.getElementById('confirmPassword');
+
+        if (newPassword.value !== confirmPassword.value) {
+            confirmPassword.classList.add('is-invalid');
+            showToast('Passwords do not match!', 'error');
+            return;
+        }
+
+        if (this.checkValidity()) {
+            showToast('Password updated successfully!', 'success');
+            this.reset();
+            this.classList.remove('was-validated');
+        } else {
+            e.stopPropagation();
+            this.classList.add('was-validated');
+            showToast('Please fill in all required fields correctly.', 'error');
+        }
+    });
+
+    // ===== TOGGLE PASSWORD VISIBILITY =====
+    document.querySelectorAll('.toggle-password').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+            const input = document.getElementById(targetId);
+            const icon = this.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('bi-eye', 'bi-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('bi-eye-slash', 'bi-eye');
+            }
+        });
+    });
+
+    // ===== APPEARANCE FORM =====
+    const appearanceForm = document.getElementById('appearanceForm');
+    appearanceForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast('Appearance settings saved!', 'success');
+    });
+
+    // Theme selection
+    document.getElementById('themeLight').addEventListener('click', function() {
+        document.querySelectorAll('#themeLight, #themeDark, #themeAuto').forEach(el => {
+            el.style.borderColor = 'transparent';
+        });
+        this.style.borderColor = 'var(--primary-color)';
+        showToast('Light theme selected', 'info');
+    });
+
+    document.getElementById('themeDark').addEventListener('click', function() {
+        document.querySelectorAll('#themeLight, #themeDark, #themeAuto').forEach(el => {
+            el.style.borderColor = 'transparent';
+        });
+        this.style.borderColor = 'var(--primary-color)';
+        showToast('Dark theme selected', 'info');
+    });
+
+    document.getElementById('themeAuto').addEventListener('click', function() {
+        document.querySelectorAll('#themeLight, #themeDark, #themeAuto').forEach(el => {
+            el.style.borderColor = 'transparent';
+        });
+        this.style.borderColor = 'var(--primary-color)';
+        showToast('Auto theme selected', 'info');
+    });
+
+    // Color pickers
+    document.getElementById('brandColor').addEventListener('input', function() {
+        document.getElementById('brandColorValue').textContent = this.value;
+    });
+
+    document.getElementById('accentColor').addEventListener('input', function() {
+        document.getElementById('accentColorValue').textContent = this.value;
+    });
+
+    // ===== ADVANCED FORM =====
+    const advancedForm = document.getElementById('advancedForm');
+    advancedForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showToast('Advanced settings saved!', 'success');
+    });
+
+    // API Key actions
+    document.getElementById('regenerateApiKey').addEventListener('click', function() {
+        if (confirm('Are you sure you want to regenerate the API key? The old key will stop working immediately.')) {
+            const newKey = 'ht_live_' + Math.random().toString(36).substring(2, 22);
+            document.getElementById('apiKey').value = newKey;
+            showToast('API key regenerated successfully!', 'success');
+        }
+    });
+
+    document.getElementById('copyApiKey').addEventListener('click', function() {
+        const apiKey = document.getElementById('apiKey');
+        apiKey.select();
+        apiKey.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(apiKey.value).then(() => {
+            showToast('API key copied to clipboard!', 'success');
+        });
+    });
+
+    // Clear cache
+    document.getElementById('clearCache').addEventListener('click', function() {
+        if (confirm('Are you sure you want to clear the cache? This may temporarily slow down the store.')) {
+            showToast('Cache cleared successfully!', 'success');
+        }
+    });
+
+    // ===== LOGOUT ALL SESSIONS =====
+    document.getElementById('logoutAllSessions').addEventListener('click', function() {
+        if (confirm('Are you sure you want to logout from all other sessions?')) {
+            showToast('Logged out from all other sessions.', 'success');
+        }
+    });
+
+    // ===== RESET SETTINGS CONFIRMATION =====
+    const confirmResetInput = document.getElementById('confirmResetInput');
+    const confirmResetBtn = document.getElementById('confirmResetBtn');
+
+    confirmResetInput.addEventListener('input', function() {
+        confirmResetBtn.disabled = this.value !== 'RESET';
+    });
+
+    confirmResetBtn.addEventListener('click', function() {
+        if (confirmResetInput.value === 'RESET') {
+            showToast('All settings have been reset to default.', 'success');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            modal.hide();
+            confirmResetInput.value = '';
+            confirmResetBtn.disabled = true;
+        }
+    });
+
+    // ===== DELETE ACCOUNT CONFIRMATION =====
+    const confirmDeleteEmail = document.getElementById('confirmDeleteEmail');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+    confirmDeleteEmail.addEventListener('input', function() {
+        confirmDeleteBtn.disabled = this.value !== 'ahmad@himatech-store.com';
+    });
+
+    confirmDeleteBtn.addEventListener('click', function() {
+        if (confirmDeleteEmail.value === 'ahmad@himatech-store.com') {
+            showToast('Account deletion request submitted.', 'warning');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteAccountModal'));
+            modal.hide();
+            confirmDeleteEmail.value = '';
+            confirmDeleteBtn.disabled = true;
+        }
+    });
+
+    // ===== TOAST NOTIFICATION SYSTEM =====
+    function showToast(message, type = 'info') {
+        const container = document.querySelector('.toast-container');
+        const toast = document.createElement('div');
+
+        const icons = {
+            success: 'bi-check-circle-fill',
+            error: 'bi-x-circle-fill',
+            warning: 'bi-exclamation-triangle-fill',
+            info: 'bi-info-circle-fill'
+        };
+
+        const colors = {
+            success: '#10b981',
+            error: '#ef4444',
+            warning: '#f59e0b',
+            info: '#2563eb'
+        };
+
+        toast.className = 'toast show';
+        toast.style.cssText = `
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-left: 4px solid ${colors[type]};
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideInRight 0.3s ease;
+        `;
+
+        toast.innerHTML = `
+            <i class="bi ${icons[type]}" style="color: ${colors[type]}; font-size: 20px;"></i>
+            <span style="font-size: 14px; color: #334155; font-weight: 500;">${message}</span>
+            <button style="margin-left: auto; background: none; border: none; color: #94a3b8; cursor: pointer; font-size: 18px;" onclick="this.parentElement.remove()">
+                <i class="bi bi-x"></i>
+            </button>
+        `;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.animation = 'slideOutRight 0.3s ease forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
+
+    // ===== KEYBOARD SHORTCUTS =====
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            headerSearch.focus();
+        }
+        if (e.key === 'Escape') {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+        }
+    });
+
+    // ===== RESPONSIVE SIDEBAR ON RESIZE =====
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 991) {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+        }
+    });
+
+    // Add keyframe animations for toast
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // ===== WELCOME TOAST =====
+    setTimeout(() => {
+        showToast('Welcome to Settings, Ahmad!', 'info');
+    }, 1000);
+</script>
+</body>
+</html>

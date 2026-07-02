@@ -1,0 +1,56 @@
+
+---
+
+## ✨ Features
+
+### 🛍️ Customer Features
+- [x] Browse products by category
+- [x] Product search & filtering
+- [x] Shopping cart functionality
+- [x] Wishlist management
+- [x] User registration & login
+- [x] Order tracking
+- [x] Responsive design (Mobile/Tablet/Desktop)
+- [x] Dark/Light mode support
+
+### ⚙️ Admin Features
+- [x] Dashboard with analytics
+- [x] Order management
+- [x] Product CRUD operations
+- [x] Customer management
+- [x] Inventory tracking
+- [x] Sales reports & charts
+- [x] Review moderation
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Usage |
+|------------|-------|
+| **HTML5** | Semantic markup |
+| **CSS3** | Custom styling with CSS Variables |
+| **Bootstrap 5** | Grid system & components |
+| **Bootstrap Icons** | Icon library |
+| **Google Fonts (Inter)** | Typography |
+| **Vanilla JavaScript** | Interactivity & logic |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Any modern web browser
+- Git (optional, for cloning)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/HimaTech-Store.git
+
+# Navigate to project
+cd HimaTech-Store
+
+# Open in browser (or use Live Server)
+open index.html

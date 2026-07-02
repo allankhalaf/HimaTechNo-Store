@@ -1,0 +1,2317 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HimaTech-Store</title>
+    <meta name="description" content="HimaTech-Store - Your premier destination for laptops, smartphones, accessories and all tech gadgets in Syria.">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom SCSS (compiled via Webpack) -->
+   
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f97316;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        /* ===== HEADER ===== */
+        .top-bar {
+            background-color: var(--dark-color);
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+        
+        .top-bar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .top-bar a:hover {
+            color: #fff;
+        }
+        
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+        
+        .header-icons .btn {
+            color: var(--dark-color);
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .header-icons .btn:hover {
+            color: var(--primary-color);
+        }
+        
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box input {
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 45px;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+        
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* ===== HERO SECTION ===== */
+        .hero-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #1e293b 100%);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('https://via.placeholder.com/800x600/2563eb/ffffff?text=Tech+Gadgets') center/cover;
+            opacity: 0.15;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-content h1 span {
+            color: var(--secondary-color);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            color: #fff;
+        }
+        
+        .btn-outline-custom {
+            background-color: transparent;
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            border: 2px solid #fff;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-left: 15px;
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: #fff;
+            color: var(--dark-color);
+        }
+        
+        /* ===== FEATURES BAR ===== */
+        .features-bar {
+            background-color: #fff;
+            padding: 40px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .feature-icon {
+            width: 55px;
+            height: 55px;
+            background-color: rgba(37, 99, 235, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-item h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .feature-item p {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+            margin: 0;
+        }
+        
+        /* ===== SECTION TITLE ===== */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .section-title p {
+            color: var(--gray-color);
+            font-size: 1rem;
+        }
+        
+        .section-title .line {
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* ===== CATEGORY CARDS ===== */
+        .category-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            padding: 30px 20px 20px;
+            color: #fff;
+        }
+        
+        .category-overlay h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .category-overlay span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* ===== PRODUCT CARDS ===== */
+        .product-card {
+            background-color: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .badge-sale {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+        
+        .badge-new {
+            background-color: var(--success-color);
+            color: #fff;
+        }
+        
+        .badge-hot {
+            background-color: var(--secondary-color);
+            color: #fff;
+        }
+        
+        .product-wishlist {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            background-color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 2;
+        }
+        
+        .product-wishlist:hover {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+        
+        .product-wishlist.active {
+            background-color: var(--danger-color);
+            color: #fff;
+        }
+        
+        .product-img {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8fafc;
+            padding: 20px;
+        }
+        
+        .product-img img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-actions {
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            transition: bottom 0.3s;
+        }
+        
+        .product-card:hover .product-actions {
+            bottom: 10px;
+        }
+        
+        .product-actions .btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fff;
+            border: none;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product-actions .btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-category {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            text-decoration: none;
+            display: block;
+            line-height: 1.4;
+        }
+        
+        .product-title:hover {
+            color: var(--primary-color);
+        }
+        
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .product-rating i {
+            color: #fbbf24;
+            font-size: 0.85rem;
+        }
+        
+        .product-rating span {
+            font-size: 0.8rem;
+            color: var(--gray-color);
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .price-current {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .price-old {
+            font-size: 0.95rem;
+            color: var(--gray-color);
+            text-decoration: line-through;
+        }
+        
+        /* ===== PROMO BANNERS ===== */
+        .promo-banner {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            min-height: 280px;
+            display: flex;
+            align-items: center;
+            padding: 40px;
+        }
+        
+        .promo-banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+        
+        .promo-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.2));
+            z-index: 1;
+        }
+        
+        .promo-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+        }
+        
+        .promo-content h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .promo-content p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        /* ===== BRANDS ===== */
+        .brand-item {
+            background-color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            transition: all 0.3s;
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+        
+        .brand-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .brand-item img {
+            max-height: 50px;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        
+        /* ===== TESTIMONIALS ===== */
+        .testimonial-card {
+            background-color: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        .testimonial-card .quote-icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            opacity: 0.3;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        
+        .testimonial-author h5 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .testimonial-author span {
+            font-size: 0.85rem;
+            color: var(--gray-color);
+        }
+        
+        /* ===== NEWSLETTER ===== */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+        }
+        
+        .newsletter-content h2 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .newsletter-content p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 25px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            padding: 14px 35px;
+            border-radius: 50px;
+            border: none;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #ea580c;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--dark-color);
+            color: #cbd5e1;
+            padding-top: 70px;
+        }
+        
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .footer-brand span {
+            color: var(--secondary-color);
+        }
+        
+        .footer-about p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-links a i {
+            font-size: 0.8rem;
+        }
+        
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .footer-contact i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .payment-methods img:hover {
+            opacity: 1;
+        }
+        
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+        
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .custom-toast {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        
+        .toast-success .toast-icon {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: var(--success-color);
+        }
+        
+        .toast-error .toast-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+        
+        .toast-info .toast-icon {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+        
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section::before {
+                display: none;
+            }
+            
+            .btn-outline-custom {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+        
+        /* ===== ANIMATIONS ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* ===== ENHANCED RESPONSIVE & ADMIN LINK STYLES ===== */
+
+        /* Admin Link in Header */
+        .admin-link {
+            color: var(--dark-color) !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .admin-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+
+        .admin-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .admin-link:hover::after {
+            width: 100%;
+        }
+
+        /* Enhanced Mobile Menu */
+        @media (max-width: 991px) {
+            .navbar-collapse {
+                background: white;
+                border-radius: 16px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+                padding: 20px;
+                margin-top: 15px;
+                border: 1px solid var(--border-color);
+            }
+
+            .navbar-nav {
+                gap: 5px;
+            }
+
+            .nav-link {
+                padding: 12px 16px !important;
+                border-radius: 10px;
+                transition: all 0.2s;
+            }
+
+            .nav-link:hover, .nav-link.active {
+                background: rgba(37, 99, 235, 0.08);
+            }
+
+            .header-icons {
+                justify-content: center;
+                padding-top: 15px;
+                border-top: 1px solid var(--border-color);
+                margin-top: 10px;
+            }
+        }
+
+        /* Enhanced Product Cards */
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+
+        /* Enhanced Category Cards */
+        .category-card {
+            transition: all 0.4s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .category-card img {
+            transition: transform 0.6s ease;
+        }
+
+        /* Enhanced Hero Section */
+        @media (max-width: 991px) {
+            .hero-section {
+                min-height: 500px;
+                padding: 60px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem !important;
+            }
+
+            .hero-content p {
+                font-size: 1rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem !important;
+            }
+
+            .btn-primary-custom, .btn-outline-custom {
+                padding: 12px 25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Enhanced Features Bar */
+        @media (max-width: 767px) {
+            .features-bar {
+                padding: 25px 0;
+            }
+
+            .feature-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .feature-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Enhanced Footer Responsive */
+        @media (max-width: 767px) {
+            .footer {
+                padding-top: 40px;
+            }
+
+            .footer h5 {
+                margin-bottom: 15px;
+                margin-top: 25px;
+            }
+
+            .footer-bottom {
+                margin-top: 30px;
+                padding: 20px 0;
+            }
+
+            .payment-methods {
+                justify-content: center !important;
+                margin-top: 15px;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading Animation for Images */
+        img {
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        img[loading] {
+            opacity: 0;
+        }
+
+        /* Enhanced Toast */
+        .custom-toast {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Admin badge in footer */
+        .admin-footer-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 8px;
+            color: var(--primary-color) !important;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .admin-footer-link:hover {
+            background: var(--primary-color);
+            color: white !important;
+            transform: translateX(5px);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span><i class="bi bi-telephone-fill me-2"></i>+963 0988 123 456</span>
+                    <span class="ms-4"><i class="bi bi-envelope-fill me-2"></i>info@himatech-store.com</span>
+                </div>
+                <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                    <a href="#" class="me-3"><i class="bi bi-geo-alt-fill me-1"></i>Damascus, Syria</a>
+                    <a href="404.html" class="me-3">Track Order</a>
+                    <a href="login.html">Login</a>
+                    <span class="mx-2">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN HEADER ===== -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Hima<span>Tech</span></a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                        
+                    
+                        <li class="nav-item d-lg-none">
+                            <a class="nav-link admin-link" href="admin/dashboard.html" target="_blank">
+                                <i class="bi bi-speedometer2 me-2"></i>Admin Dashboard
+                            </a>
+                        </li></ul>
+                    
+                    <div class="d-flex align-items-center gap-3 header-icons">
+                        <div class="search-box d-none d-lg-block">
+                            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                            <button type="button" onclick="handleSearch()"><i class="bi bi-search"></i></button>
+                        </div>
+                        
+                        <!-- Admin Dashboard -->
+                        <a href="../admin/dashboard.html" class="btn btn-link position-relative text-decoration-none admin-link" title="Admin Dashboard" target="_blank" target="_blank">
+                            <i class="bi bi-speedometer2 fs-5"></i>
+                        </a>
+                        
+                        <a href="wishlist.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-heart fs-5"></i>
+                            <span class="badge-count" id="wishlistCount">3</span>
+                        </a>
+                        
+                        <a href="cart.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span class="badge-count" id="cartCount">2</span>
+                        </a>
+                        
+                        <a href="user-profile.html" class="btn btn-link text-decoration-none">
+                            <i class="bi bi-person fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero-section">
+        <div class="container position-relative z-2">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content fade-in-up">
+                    <h1>Discover the Future of <span>Technology</span></h1>
+                    <p>Explore our curated collection of premium laptops, smartphones, accessories, and cutting-edge gadgets. Quality tech, delivered to your doorstep in Syria.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="shop.html" class="btn-primary-custom">
+                            <i class="bi bi-shop me-2"></i>Shop Now
+                        </a>
+                        <a href="categories.html" class="btn-outline-custom">
+                            <i class="bi bi-grid me-2"></i>Browse Categories
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block text-center fade-in-up delay-2">
+                    <img src="../images/Hima.jpg" 
+                         alt="Hero Image" 
+                         class="img-fluid rounded-4 shadow-lg"
+                         onerror="this.src='https://via.placeholder.com/600x500?text=HimaTech+Store'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURES BAR ===== -->
+    <section class="features-bar">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="bi bi-truck"></i>
+                        </div>
+                        <div>
+                            <h5>Free Shipping</h5>
+                            <p>On orders over $50</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <div>
+                            <h5>Secure Payment</h5>
+                            <p>100% protected</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="bi bi-arrow-counterclockwise"></i>
+                        </div>
+                        <div>
+                            <h5>Easy Returns</h5>
+                            <p>30-day policy</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <div>
+                            <h5>24/7 Support</h5>
+                            <p>Dedicated team</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CATEGORIES SECTION ===== -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop by Category</h2>
+                <p>Browse our wide range of tech categories</p>
+                <div class="line"></div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=laptops" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/HPSpectre.jpeg" 
+                                 alt="Laptops"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Laptops'">
+                            <div class="category-overlay">
+                                <h4>Laptops</h4>
+                                <span>45 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=smartphones" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/Smartphones.jpeg" 
+                                 alt="Smartphones"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Smartphones'">
+                            <div class="category-overlay">
+                                <h4>Smartphones</h4>
+                                <span>78 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=accessories" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/Accessories.jpeg" 
+                                 alt="Accessories"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Accessories'">
+                            <div class="category-overlay">
+                                <h4>Accessories</h4>
+                                <span>120 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=gaming" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/Gaming.jpeg" 
+                                 alt="Gaming"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Gaming'">
+                            <div class="category-overlay">
+                                <h4>Gaming</h4>
+                                <span>34 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=audio" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/Audio.jpeg" 
+                                 alt="Audio"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Audio'">
+                            <div class="category-overlay">
+                                <h4>Audio</h4>
+                                <span>56 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=smartwatches" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/Smartwatches.jpeg" 
+                                 alt="Smartwatches"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Smartwatches'">
+                            <div class="category-overlay">
+                                <h4>Smartwatches</h4>
+                                <span>29 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html?cat=cameras" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/Cameras.jpeg" 
+                                 alt="Cameras"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=Cameras'">
+                            <div class="category-overlay">
+                                <h4>Cameras</h4>
+                                <span>18 Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3">
+                    <a href="categories.html" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="../images/view.png" 
+                                 alt="View All"
+                                 onerror="this.src='https://via.placeholder.com/400x300?text=View+All'">
+                            <div class="category-overlay">
+                                <h4>View All</h4>
+                                <span>380+ Products</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FEATURED PRODUCTS ===== -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Products</h2>
+                <p>Handpicked tech essentials for you</p>
+                <div class="line"></div>
+            </div>
+            
+            <div class="row g-4" id="featuredProducts">
+                <!-- Product 1 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-sale">-20%</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/MacBook-Pro.jpeg" 
+                                 alt="MacBook Pro"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=MacBook+Pro'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(1)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(1)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(1)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Laptops</div>
+                            <a href="product-details.html?id=1" class="product-title">MacBook Pro 14" M3 Chip</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(4.5)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$1,999</span>
+                                <span class="price-old">$2,499</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-new">New</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/iPhone-15-Pro.jpeg" 
+                                 alt="iPhone 15 Pro"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=iPhone+15+Pro'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(2)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(2)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(2)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Smartphones</div>
+                            <a href="product-details.html?id=2" class="product-title">iPhone 15 Pro Max 256GB</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <span>(5.0)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$1,199</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Sony-Headphones.jpeg" 
+                                 alt="Sony Headphones"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Sony+WH-1000XM5'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(3)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(3)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(3)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Audio</div>
+                            <a href="product-details.html?id=3" class="product-title">Sony WH-1000XM5 Wireless</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <span>(4.0)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$348</span>
+                                <span class="price-old">$399</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-hot">Hot</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Samsung-Galaxy.jpeg" 
+                                 alt="Samsung Galaxy"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Samsung+S24+Ultra'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(4)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(4)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(4)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Smartphones</div>
+                            <a href="product-details.html?id=4" class="product-title">Samsung Galaxy S24 Ultra</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(4.7)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$1,299</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-sale">-15%</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/iPad-Pro.jpeg" 
+                                 alt="iPad Pro"
+                                 onerror="this.src='../images/iPad-Pro.jpeg'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(5)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(5)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(5)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Tablets</div>
+                            <a href="product-details.html?id=5" class="product-title">iPad Pro 12.9" M2 Chip</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <span>(4.9)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$1,049</span>
+                                <span class="price-old">$1,199</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Apple-Watch.jpeg" 
+                                 alt="Apple Watch"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Apple+Watch+Ultra'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(6)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(6)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(6)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Smartwatches</div>
+                            <a href="product-details.html?id=6" class="product-title">Apple Watch Ultra 2</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(4.6)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$799</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 7 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-new">New</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/PlayStation-5.jpeg" 
+                                 alt="PlayStation 5"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=PS5+Console'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(7)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(7)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(7)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Gaming</div>
+                            <a href="product-details.html?id=7" class="product-title">Sony PlayStation 5 Console</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <span>(5.0)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$499</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 8 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-sale">-30%</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Logitech-Mouse.jpeg" 
+                                 alt="Logitech Mouse"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Logitech+MX+Master'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(8)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(8)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                                <button class="btn" onclick="compareProduct(8)" title="Compare"><i class="bi bi-arrow-left-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Accessories</div>
+                            <a href="product-details.html?id=8" class="product-title">Logitech MX Master 3S</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <span>(4.8)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$69</span>
+                                <span class="price-old">$99</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="shop.html" class="btn-primary-custom">
+                    <i class="bi bi-grid-3x3-gap me-2"></i>View All Products
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROMO BANNERS ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="promo-banner">
+                        <img src="../images/Laptops-Promo.jpeg" 
+                             alt="Laptops Promo"
+                             onerror="this.src='https://via.placeholder.com/600x300?text=Laptops+Promo'">
+                        <div class="promo-content">
+                            <h3>Premium Laptops</h3>
+                            <p>Up to 25% off on selected models. Power your productivity.</p>
+                            <a href="shop.html?cat=laptops" class="btn-primary-custom">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="promo-banner">
+                        <img src="../images/Gaming-Promo.jpeg" 
+                             alt="Gaming Promo"
+                             onerror="this.src='https://via.placeholder.com/600x300?text=Gaming+Promo'">
+                        <div class="promo-content">
+                            <h3>Gaming Gear</h3>
+                            <p>Level up your game with our latest collection. Free shipping!</p>
+                            <a href="shop.html?cat=gaming" class="btn-primary-custom">Explore</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEW ARRIVALS ===== -->
+    <section class="py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>New Arrivals</h2>
+                <p>Check out the latest tech drops</p>
+                <div class="line"></div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-new">New</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Apple Vision Pro.jpeg" 
+                                 alt="Apple Vision Pro"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Vision+Pro'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(9)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(9)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">VR/AR</div>
+                            <a href="product-details.html?id=9" class="product-title">Apple Vision Pro</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(4.5)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$3,499</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-new">New</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/DJI.png" 
+                                 alt="DJI Drone"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=DJI+Mini+4'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(10)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(10)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Drones</div>
+                            <a href="product-details.html?id=10" class="product-title">DJI Mini 4 Pro</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <span>(5.0)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$759</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-new">New</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Meta Quest 3 VR Headset.jpeg" 
+                                 alt="Meta Quest 3"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Meta+Quest+3'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(11)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(11)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">VR/AR</div>
+                            <a href="product-details.html?id=11" class="product-title">Meta Quest 3 VR Headset</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <span>(4.0)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$499</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card h-100">
+                        <span class="product-badge badge-hot">Hot</span>
+                        <button class="product-wishlist" onclick="toggleWishlist(this)" title="Add to Wishlist">
+                            <i class="bi bi-heart"></i>
+                        </button>
+                        <div class="product-img">
+                            <img src="../images/Steam Deck OLED.jpeg" 
+                                 alt="Steam Deck"
+                                 onerror="this.src='https://via.placeholder.com/300x300?text=Steam+Deck'">
+                            <div class="product-actions">
+                                <button class="btn" onclick="quickView(12)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button class="btn" onclick="addToCart(12)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">Gaming</div>
+                            <a href="product-details.html?id=12" class="product-title">Steam Deck OLED 512GB</a>
+                            <div class="product-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(4.7)</span>
+                            </div>
+                            <div class="product-price">
+                                <span class="price-current">$549</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== BRANDS ===== -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trusted Brands</h2>
+                <p>We partner with the world's leading tech brands</p>
+                <div class="line"></div>
+            </div>
+            
+            <div class="row g-3">
+                <div class="col-4 col-md-2">
+                    <div class="brand-item">
+                        <img src="../images/Apple.png" 
+                             alt="Apple"
+                             onerror="this.src='https://via.placeholder.com/150x80?text=Apple'">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="brand-item">
+                        <img src="../images/Samsung.jpeg" 
+                             alt="Samsung"
+                             onerror="this.src='https://via.placeholder.com/150x80?text=Samsung'">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="brand-item">
+                        <img src="../images/Sony.jpeg" 
+                             alt="Sony"
+                             onerror="this.src='https://via.placeholder.com/150x80?text=Sony'">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="brand-item">
+                        <img src="../images/Microsoft.png" 
+                             alt="Microsoft"
+                             onerror="this.src='https://via.placeholder.com/150x80?text=Microsoft'">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="brand-item">
+                        <img src="../images/Logitech.jpeg" 
+                             alt="Logitech"
+                             onerror="this.src='https://via.placeholder.com/150x80?text=Logitech'">
+                    </div>
+                </div>
+                <div class="col-4 col-md-2">
+                    <div class="brand-item">
+                        <img src="../images/DJI1.png" 
+                             alt="DJI"
+                             onerror="this.src='https://via.placeholder.com/150x80?text=DJI'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+                <p>Trusted by thousands of tech enthusiasts in Syria</p>
+                <div class="line"></div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="testimonial-card h-100">
+                        <div class="quote-icon"><i class="bi bi-quote"></i></div>
+                        <p>"HimaTech-Store has been my go-to for all tech purchases. The delivery to Damascus was fast and the products are 100% original. Highly recommended!"</p>
+                        <div class="testimonial-author">
+                            <img src="../images/Ahmad.jpeg" 
+                                 alt="Ahmad K."
+                                 onerror="this.src='https://via.placeholder.com/60x60?text=AK'">
+                            <h5>Ahmad Khaled</h5>
+                            <span>Software Engineer, Damascus</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card h-100">
+                        <div class="quote-icon"><i class="bi bi-quote"></i></div>
+                        <p>"I ordered a MacBook Pro and it arrived in perfect condition. The customer support team was very helpful throughout the process. Best tech store in Syria!"</p>
+                        <div class="testimonial-author">
+                            <img src="../images/Sarah.jpeg" 
+                                 alt="Sarah M."
+                                 onerror="this.src='https://via.placeholder.com/60x60?text=SM'">
+                            <h5>Sarah Mahmoud</h5>
+                            <span>Graphic Designer, Aleppo</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card h-100">
+                        <div class="quote-icon"><i class="bi bi-quote"></i></div>
+                        <p>"Great prices, genuine products, and excellent after-sales service. I've bought my gaming setup from here and couldn't be happier with the quality."</p>
+                        <div class="testimonial-author">
+                            <img src="../images/Omar.jpeg" 
+                                 alt="Omar Y."
+                                 onerror="this.src='https://via.placeholder.com/60x60?text=OY'">
+                            <h5>Omar Youssef</h5>
+                            <span>Student, Homs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8 text-center newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get the latest deals, new arrivals, and tech news delivered straight to your inbox.</p>
+                    <form class="newsletter-form mx-auto" onsubmit="handleNewsletter(event)">
+                        <input type="email" class="form-control" placeholder="Enter your email address" required id="newsletterEmail">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="mt-3 mb-0" style="font-size: 0.85rem; opacity: 0.7;">
+                        <i class="bi bi-shield-check me-1"></i>We respect your privacy. Unsubscribe anytime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <a href="index.html" class="footer-brand">Hima<span>Tech</span></a>
+                        <p>Your premier destination for laptops, smartphones, accessories, and all things tech. We bring the latest technology to your doorstep in Syria with quality guaranteed.</p>
+                        <div class="social-links">
+                            <a href="404.html" title="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="404.html" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="404.html" title="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="404.html" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="404.html" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i>Home</a></li>
+                        <li><a href="shop.html"><i class="bi bi-chevron-right"></i>Shop</a></li>
+                        <li><a href="categories.html"><i class="bi bi-chevron-right"></i>Categories</a></li>
+                        <li><a href="blog.html"><i class="bi bi-chevron-right"></i>Blog</a></li>
+                        <li><a href="about.html"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <h5>Customer Service</h5>
+                    <ul class="footer-links">
+                        <li><a href="contact.html"><i class="bi bi-chevron-right"></i>Contact Us</a></li>
+                        <li><a href="faq.html"><i class="bi bi-chevron-right"></i>FAQ</a></li>
+                        <li><a href="privacy.html"><i class="bi bi-chevron-right"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="bi bi-chevron-right"></i>Terms of Service</a></li>
+                        <li><a href="404.html"><i class="bi bi-chevron-right"></i>Track Order</a></li>
+
+                                        </ul>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <h5>Contact Info</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>123 Tech Street, Damascus, Syria</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+963 988 123 456</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@himatech-store.com</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill"></i>
+                            <span>Sat - Thu: 9:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                     <p>All rights reserved. Built with <i class="bi bi-heart-fill text-danger"></i> in Syria. HimaTech-Store &copy;2026 </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="payment-methods d-flex justify-content-md-end gap-2">
+                            <img src="../images/تنزيل.png" alt="Visa">
+                            <img src="../images/Mastercard.png" alt="MasterCard">
+                            <img src="../images/paypal.png" alt="PayPal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // ===== SCROLL TO TOP =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== SEARCH FUNCTIONALITY =====
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showToast('Searching for: ' + query, 'info');
+                // Redirect to shop with search query
+                setTimeout(() => {
+                    window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+                }, 500);
+            } else {
+                showToast('Please enter a search term', 'error');
+            }
+        }
+
+        // Allow Enter key for search
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // ===== WISHLIST TOGGLE =====
+        function toggleWishlist(btn) {
+            btn.classList.toggle('active');
+            const icon = btn.querySelector('i');
+            
+            if (btn.classList.contains('active')) {
+                icon.classList.remove('bi-heart');
+                icon.classList.add('bi-heart-fill');
+                showToast('Added to wishlist!', 'success');
+                updateWishlistCount(1);
+            } else {
+                icon.classList.remove('bi-heart-fill');
+                icon.classList.add('bi-heart');
+                showToast('Removed from wishlist', 'info');
+                updateWishlistCount(-1);
+            }
+        }
+
+        function updateWishlistCount(change) {
+            const badge = document.getElementById('wishlistCount');
+            let count = parseInt(badge.textContent) + change;
+            badge.textContent = count > 0 ? count : 0;
+        }
+
+        // ===== ADD TO CART =====
+        function addToCart(productId) {
+            showToast('Product added to cart!', 'success');
+            updateCartCount(1);
+        }
+
+        function updateCartCount(change) {
+            const badge = document.getElementById('cartCount');
+            let count = parseInt(badge.textContent) + change;
+            badge.textContent = count > 0 ? count : 0;
+        }
+
+        // ===== QUICK VIEW =====
+        function quickView(productId) {
+            showToast('Quick view for product #' + productId + ' (Coming soon)', 'info');
+        }
+
+        // ===== COMPARE PRODUCT =====
+        function compareProduct(productId) {
+            showToast('Product #' + productId + ' added to compare', 'info');
+        }
+
+        // ===== NEWSLETTER =====
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            showToast('Thank you for subscribing! Check your email.', 'success');
+            document.getElementById('newsletterEmail').value = '';
+        }
+
+        // ===== TOAST NOTIFICATIONS =====
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            let icon = 'bi-info-circle';
+            if (type === 'success') icon = 'bi-check-circle';
+            if (type === 'error') icon = 'bi-x-circle';
+            
+            toast.className = `custom-toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon"><i class="bi ${icon}"></i></div>
+                <div class="toast-message">${message}</div>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ===== ANIMATE ON SCROLL =====
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // ===== MOBILE MENU CLOSE ON CLICK =====
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbar = document.getElementById('mainNavbar');
+                const bsCollapse = bootstrap.Collapse.getInstance(navbar);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            animateOnScroll();
+            
+            // Check for URL parameters (search, category, etc.)
+            const urlParams = new URLSearchParams(window.location.search);
+            const searchQuery = urlParams.get('search');
+            if (searchQuery) {
+                console.log('Search query:', searchQuery);
+            }
+        });
+    </script>
+</body>
+</html>

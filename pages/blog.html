@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <meta name="description" content="Latest tech news, reviews, and guides from HimaTech-Store">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom SCSS (compiled via Webpack) -->
+    <link rel="stylesheet" href="dist/css/main.css">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f97316;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .top-bar {
+            background-color: var(--dark-color);
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+
+        .top-bar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover { color: #fff; }
+
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-brand span { color: var(--secondary-color); }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .header-icons .btn {
+            color: var(--dark-color);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .header-icons .btn:hover { color: var(--primary-color); }
+
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 45px;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-section {
+            background-color: #f8fafc;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-section .breadcrumb {
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-section .breadcrumb-item a {
+            color: var(--gray-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-section .breadcrumb-item a:hover { color: var(--primary-color); }
+
+        .breadcrumb-section .breadcrumb-item.active {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        /* ===== BLOG PAGE ===== */
+        .blog-section { padding: 60px 0; }
+
+        .featured-post {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-bottom: 40px;
+        }
+
+        .featured-post:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .featured-post-img {
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+
+        .featured-post-body {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .featured-post .badge-featured {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-color);
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            width: fit-content;
+        }
+
+        .featured-post h2 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .featured-post .meta {
+            font-size: 0.875rem;
+            color: var(--gray-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .featured-post .meta i { color: var(--primary-color); }
+        .featured-post .meta span { display: flex; align-items: center; gap: 4px; }
+
+        .featured-post p {
+            font-size: 0.9375rem;
+            color: var(--gray-color);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .btn-read-more {
+            background-color: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+        }
+
+        .btn-read-more:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            color: #fff;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .blog-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .blog-card:hover .blog-card-img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-img-wrap { overflow: hidden; }
+
+        .blog-card-body {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card .badge-cat {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+
+        .blog-card h3 {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .blog-card .meta {
+            font-size: 0.8125rem;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .blog-card .meta i { font-size: 0.75rem; }
+
+        .blog-card p {
+            font-size: 0.875rem;
+            color: var(--gray-color);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .blog-card .btn-read-sm {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+        }
+
+        .blog-card .btn-read-sm:hover {
+            gap: 10px;
+            color: var(--primary-dark);
+        }
+
+        /* Sidebar */
+        .sidebar-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .sidebar-card-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .sidebar-card-header h5 {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-color);
+            margin: 0;
+        }
+
+        .sidebar-card-body { padding: 20px 24px; }
+
+        .search-form { position: relative; }
+        .search-form input {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px 44px 10px 16px;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+            background: #f8fafc;
+        }
+
+        .search-form input:focus {
+            border-color: var(--primary-color);
+            background: #fff;
+            box-shadow: none;
+        }
+
+        .search-form button {
+            position: absolute;
+            right: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .search-form button:hover {
+            background: var(--primary-dark);
+        }
+
+        .cat-list { list-style: none; padding: 0; margin: 0; }
+        .cat-list li { margin-bottom: 4px; }
+        .cat-list a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--gray-color);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cat-list a:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+
+        .cat-list a .count {
+            background: #f1f5f9;
+            color: var(--gray-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .cat-list a:hover .count {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .recent-post {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .recent-post:last-child { border-bottom: none; padding-bottom: 0; }
+        .recent-post:first-child { padding-top: 0; }
+        .recent-post:hover { padding-left: 4px; }
+
+        .recent-post img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #e2e8f0;
+        }
+
+        .recent-post div { flex: 1; min-width: 0; }
+        .recent-post h6 {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #334155;
+            margin: 0 0 4px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .recent-post:hover h6 { color: var(--primary-color); }
+        .recent-post small {
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-list a {
+            background: #f1f5f9;
+            color: var(--gray-color);
+            font-size: 0.8125rem;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .tag-list a:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Pagination */
+        .pagination-custom {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+            margin-top: 40px;
+        }
+
+        .pagination-custom a, .pagination-custom span {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .pagination-custom a {
+            background: #fff;
+            color: var(--gray-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .pagination-custom a:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .pagination-custom span, .pagination-custom a.active {
+            background: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+        }
+
+        .pagination-custom a.disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--dark-color);
+            color: #cbd5e1;
+            padding-top: 70px;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand span { color: var(--secondary-color); }
+
+        .footer-about p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover { color: var(--primary-color); }
+        .footer-links a i { font-size: 0.8rem; }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .payment-methods img:hover { opacity: 1; }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .custom-toast {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .toast-success .toast-icon { background-color: rgba(34, 197, 94, 0.1); color: var(--success-color); }
+        .toast-error .toast-icon { background-color: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .toast-info .toast-icon { background-color: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .featured-post-img { min-height: 220px; }
+        }
+
+        @media (max-width: 767.98px) {
+            .featured-post-body { padding: 24px; }
+            .featured-post h2 { font-size: 1.25rem; }
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span><i class="bi bi-telephone-fill me-2"></i>+963 988 123 456</span>
+                    <span class="ms-4"><i class="bi bi-envelope-fill me-2"></i>info@himatech-store.com</span>
+                </div>
+                <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                    <a href="#" class="me-3"><i class="bi bi-geo-alt-fill me-1"></i>Damascus, Syria</a>
+                    <a href="404.html" class="me-3">Track Order</a>
+                    <a href="login.html">Login</a>
+                    <span class="mx-2">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN HEADER ===== -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Hima<span>Tech</span></a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-3 header-icons">
+                        <div class="search-box d-none d-lg-block">
+                            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                            <button type="button" onclick="handleSearch()"><i class="bi bi-search"></i></button>
+                        </div>
+
+                        <a href="wishlist.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-heart fs-5"></i>
+                            <span class="badge-count" id="wishlistCount">3</span>
+                        </a>
+
+                        <a href="cart.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span class="badge-count" id="cartCount">2</span>
+                        </a>
+
+                        <a href="user-profile.html" class="btn btn-link text-decoration-none">
+                            <i class="bi bi-person fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door me-1"></i>Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- ===== BLOG SECTION ===== -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="row">
+                <!-- Blog Posts -->
+                <div class="col-lg-8">
+                    <!-- Featured Post -->
+                    <div class="featured-post fade-in-up">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <img src="../images/ai.jpeg" alt="Featured Post" class="featured-post-img" onerror="this.src='https://via.placeholder.com/600x400?text=Featured'">
+                            </div>
+                            <div class="col-md-6">
+                                <div class="featured-post-body">
+                                    <span class="badge-featured"><i class="bi bi-star-fill"></i> Featured</span>
+                                    <h2>The Future of AI in Consumer Electronics</h2>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 28, 2026</span>
+                                        <span><i class="bi bi-person"></i> Ahmad Khalil</span>
+                                    </div>
+                                    <p>Explore how artificial intelligence is revolutionizing the way we interact with our devices, from smart homes to personal assistants and beyond.</p>
+                                    <a href="404.html" class="btn-read-more">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Blog Grid -->
+                    <div class="row g-4" id="blogGrid">
+                        <!-- Blog Post 1 -->
+                        <div class="col-md-6 fade-in-up delay-1">
+                            <div class="blog-card">
+                                <div class="blog-card-img-wrap">
+                                    <img src="../images/gaminglap.jpeg" alt="Gaming Laptops" class="blog-card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Blog'">
+                                </div>
+                                <div class="blog-card-body">
+                                    <span class="badge-cat" style="background: rgba(34, 197, 94, 0.1); color: var(--success-color);"><i class="bi bi-controller"></i> Reviews</span>
+                                    <h3>Top 10 Gaming Laptops for 2026</h3>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 25, 2026</span>
+                                        <span><i class="bi bi-chat"></i> 12</span>
+                                    </div>
+                                    <p>A comprehensive review of the best gaming laptops available this year, tested for performance and value.</p>
+                                    <a href="404.html" class="btn-read-sm">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 2 -->
+                        <div class="col-md-6 fade-in-up delay-2">
+                            <div class="blog-card">
+                                <div class="blog-card-img-wrap">
+                                    <img src="../images/Smartphone Photography.jpeg" alt="Smartphone Photography" class="blog-card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Blog'">
+                                </div>
+                                <div class="blog-card-body">
+                                    <span class="badge-cat" style="background: rgba(245, 158, 11, 0.1); color: var(--warning-color);"><i class="bi bi-camera"></i> Guides</span>
+                                    <h3>Master Smartphone Photography</h3>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 22, 2026</span>
+                                        <span><i class="bi bi-chat"></i> 8</span>
+                                    </div>
+                                    <p>Learn professional photography techniques using just your smartphone camera and basic editing apps.</p>
+                                    <a href="404.html" class="btn-read-sm">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 3 -->
+                        <div class="col-md-6 fade-in-up delay-1">
+                            <div class="blog-card">
+                                <div class="blog-card-img-wrap">
+                                    <img src="../images/Home Office.jpeg" alt="Home Office" class="blog-card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Blog'">
+                                </div>
+                                <div class="blog-card-body">
+                                    <span class="badge-cat" style="background: rgba(139, 92, 246, 0.1); color: #8b5cf6;"><i class="bi bi-laptop"></i> Setup</span>
+                                    <h3>Build the Perfect Home Office</h3>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 20, 2026</span>
+                                        <span><i class="bi bi-chat"></i> 15</span>
+                                    </div>
+                                    <p>Everything you need to create a productive and ergonomic workspace at home on any budget.</p>
+                                    <a href="404.html" class="btn-read-sm">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 4 -->
+                        <div class="col-md-6 fade-in-up delay-2">
+                            <div class="blog-card">
+                                <div class="blog-card-img-wrap">
+                                    <img src="../images/Cybersecurity.jpeg" alt="Cybersecurity" class="blog-card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Blog'">
+                                </div>
+                                <div class="blog-card-body">
+                                    <span class="badge-cat" style="background: rgba(239, 68, 68, 0.1); color: var(--danger-color);"><i class="bi bi-shield-lock"></i> Security</span>
+                                    <h3>Essential Cybersecurity Tips for 2026</h3>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 18, 2026</span>
+                                        <span><i class="bi bi-chat"></i> 23</span>
+                                    </div>
+                                    <p>Protect your digital life with these essential security practices and recommended tools.</p>
+                                    <a href="404.html" class="btn-read-sm">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 5 -->
+                        <div class="col-md-6 fade-in-up delay-3">
+                            <div class="blog-card">
+                                <div class="blog-card-img-wrap">
+                                    <img src="../images/Wireless Earbud.jpeg" alt="Wireless Earbuds" class="blog-card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Blog'">
+                                </div>
+                                <div class="blog-card-body">
+                                    <span class="badge-cat" style="background: rgba(6, 182, 212, 0.1); color: #06b6d4;"><i class="bi bi-headphones"></i> Reviews</span>
+                                    <h3>Best Wireless Earbuds Under $100</h3>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 15, 2026</span>
+                                        <span><i class="bi bi-chat"></i> 19</span>
+                                    </div>
+                                    <p>Quality audio doesn't have to break the bank. Discover the best budget-friendly wireless earbuds.</p>
+                                    <a href="404.html" class="btn-read-sm">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Blog Post 6 -->
+                        <div class="col-md-6 fade-in-up delay-3">
+                            <div class="blog-card">
+                                <div class="blog-card-img-wrap">
+                                    <img src="../images/Smart Home.jpeg" alt="Smart Home" class="blog-card-img" onerror="this.src='https://via.placeholder.com/400x250?text=Blog'">
+                                </div>
+                                <div class="blog-card-body">
+                                    <span class="badge-cat" style="background: rgba(20, 184, 166, 0.1); color: #14b8a6;"><i class="bi bi-house-door"></i> Smart Home</span>
+                                    <h3>Getting Started with Smart Home Automation</h3>
+                                    <div class="meta">
+                                        <span><i class="bi bi-calendar3"></i> June 12, 2026</span>
+                                        <span><i class="bi bi-chat"></i> 31</span>
+                                    </div>
+                                    <p>Transform your living space with these beginner-friendly smart home devices and setups.</p>
+                                    <a href="404.html" class="btn-read-sm">Read More <i class="bi bi-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="pagination-custom">
+                        <a href="#" class="disabled" onclick="return false;"><i class="bi bi-chevron-left"></i></a>
+                        <span>1</span>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#"><i class="bi bi-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="col-lg-4">
+                    <!-- Search -->
+                    <div class="sidebar-card fade-in-up">
+                        <div class="sidebar-card-header">
+                            <h5><i class="bi bi-search me-2 text-primary"></i>Search</h5>
+                        </div>
+                        <div class="sidebar-card-body">
+                            <form class="search-form" id="blogSearchForm">
+                                <input type="text" placeholder="Search articles..." id="blogSearchInput">
+                                <button type="submit"><i class="bi bi-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Categories -->
+                    <div class="sidebar-card fade-in-up delay-1">
+                        <div class="sidebar-card-header">
+                            <h5><i class="bi bi-grid-3x3-gap me-2 text-primary"></i>Categories</h5>
+                        </div>
+                        <div class="sidebar-card-body">
+                            <ul class="cat-list">
+                                <li><a href="#">Reviews <span class="count">24</span></a></li>
+                                <li><a href="#">Guides <span class="count">18</span></a></li>
+                                <li><a href="#">News <span class="count">32</span></a></li>
+                                <li><a href="#">Smart Home <span class="count">15</span></a></li>
+                                <li><a href="#">Security <span class="count">9</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="sidebar-card fade-in-up delay-2">
+                        <div class="sidebar-card-header">
+                            <h5><i class="bi bi-clock-history me-2 text-primary"></i>Recent Posts</h5>
+                        </div>
+                        <div class="sidebar-card-body">
+                            <a href="404.html" class="recent-post">
+                                <img src="../images/aii.jpeg" alt="AI" onerror="this.src='https://via.placeholder.com/60?text=Img'">
+                                <div>
+                                    <h6>The Future of AI in Consumer Electronics</h6>
+                                    <small><i class="bi bi-calendar3"></i> June 28, 2026</small>
+                                </div>
+                            </a>
+                            <a href="404.html" class="recent-post">
+                                <img src="../images/Gaming.jpeg" alt="Gaming" onerror="this.src='https://via.placeholder.com/60?text=Img'">
+                                <div>
+                                    <h6>Top 10 Gaming Laptops for 2026</h6>
+                                    <small><i class="bi bi-calendar3"></i> June 25, 2026</small>
+                                </div>
+                            </a>
+                            <a href="404.html" class="recent-post">
+                                <img src="../images/Smartphone Photography.jpeg" alt="Photography" onerror="this.src='https://via.placeholder.com/60?text=Img'">
+                                <div>
+                                    <h6>Master Smartphone Photography</h6>
+                                    <small><i class="bi bi-calendar3"></i> June 22, 2026</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="sidebar-card fade-in-up delay-3">
+                        <div class="sidebar-card-header">
+                            <h5><i class="bi bi-tags me-2 text-primary"></i>Popular Tags</h5>
+                        </div>
+                        <div class="sidebar-card-body">
+                            <div class="tag-list">
+                                <a href="#">Technology</a>
+                                <a href="#">Gaming</a>
+                                <a href="#">Smartphones</a>
+                                <a href="#">Laptops</a>
+                                <a href="#">AI</a>
+                                <a href="#">Security</a>
+                                <a href="#">Smart Home</a>
+                                <a href="#">Accessories</a>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <a href="index.html" class="footer-brand">Hima<span>Tech</span></a>
+                        <p>Your premier destination for laptops, smartphones, accessories, and all things tech. We bring the latest technology to your doorstep in Syria with quality guaranteed.</p>
+                        <div class="social-links">
+                            <a href="404.html" title="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="404.html" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="404.html" title="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="404.html" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="404.html" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i>Home</a></li>
+                        <li><a href="shop.html"><i class="bi bi-chevron-right"></i>Shop</a></li>
+                        <li><a href="categories.html"><i class="bi bi-chevron-right"></i>Categories</a></li>
+                        <li><a href="blog.html"><i class="bi bi-chevron-right"></i>Blog</a></li>
+                        <li><a href="about.html"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Customer Service</h5>
+                    <ul class="footer-links">
+                        <li><a href="contact.html"><i class="bi bi-chevron-right"></i>Contact Us</a></li>
+                        <li><a href="faq.html"><i class="bi bi-chevron-right"></i>FAQ</a></li>
+                        <li><a href="privacy.html"><i class="bi bi-chevron-right"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="bi bi-chevron-right"></i>Terms of Service</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i>Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h5>Contact Info</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>123 Tech Street, Damascus, Syria</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+963 988 123 456</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@himatech-store.com</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill"></i>
+                            <span>Sat - Thu: 9:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>All rights reserved. Built with <i class="bi bi-heart-fill text-danger"></i> in Syria. HimaTech-Store &copy;2026 </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="payment-methods d-flex justify-content-md-end gap-2">
+                            <img src="../images/تنزيل.png" alt="Visa">
+                            <img src="../images/MasterCard.png" alt="MasterCard">
+                            <img src="../images/paypal.png" alt="PayPal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // ===== SCROLL TO TOP =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== SEARCH FUNCTIONALITY =====
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showToast('Searching for: ' + query, 'info');
+                setTimeout(() => {
+                    window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+                }, 500);
+            } else {
+                showToast('Please enter a search term', 'error');
+            }
+        }
+
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // ===== BLOG SEARCH =====
+        document.getElementById('blogSearchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = document.getElementById('blogSearchInput').value.toLowerCase().trim();
+            if (!query) return;
+
+            let found = false;
+            const posts = document.querySelectorAll('#blogGrid .blog-card');
+            posts.forEach(function(post) {
+                const title = post.querySelector('h3').textContent.toLowerCase();
+                const content = post.querySelector('p').textContent.toLowerCase();
+                const parent = post.closest('.col-md-6');
+
+                if (title.includes(query) || content.includes(query)) {
+                    parent.style.display = 'block';
+                    found = true;
+                } else {
+                    parent.style.display = 'none';
+                }
+            });
+
+            if (!found) {
+                showToast('No articles found matching your search.', 'error');
+            } else {
+                showToast('Found articles matching "' + query + '"', 'success');
+            }
+        });
+
+        // ===== TOAST NOTIFICATIONS =====
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let icon = 'bi-info-circle';
+            if (type === 'success') icon = 'bi-check-circle';
+            if (type === 'error') icon = 'bi-x-circle';
+
+            toast.className = `custom-toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon"><i class="bi ${icon}"></i></div>
+                <div class="toast-message">${message}</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ===== ANIMATE ON SCROLL =====
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // ===== MOBILE MENU CLOSE ON CLICK =====
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbar = document.getElementById('mainNavbar');
+                const bsCollapse = bootstrap.Collapse.getInstance(navbar);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>

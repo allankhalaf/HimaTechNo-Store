@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transactions - HimaTech-Store Admin Dashboard">
+    <title>Transactions-Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #dbeafe;
+            --secondary-color: #7c3aed;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --info-color: #06b6d4;
+            --dark-color: #1e293b;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-400: #94a3b8;
+            --gray-500: #64748b;
+            --gray-600: #475569;
+            --gray-700: #334155;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+            --sidebar-width: 280px;
+            --sidebar-collapsed: 80px;
+            --header-height: 70px;
+            --transition-speed: 0.3s;
+            --border-radius: 12px;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--gray-50);
+            color: var(--gray-800);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        .sidebar {
+            position: fixed;
+            top: 0; left: 0;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: linear-gradient(180deg, var(--gray-900) 0%, var(--gray-800) 100%);
+            z-index: 1000;
+            transition: all var(--transition-speed) ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        .sidebar::-webkit-scrollbar { width: 4px; }
+        .sidebar::-webkit-scrollbar-thumb { background: var(--gray-600); border-radius: 4px; }
+        .sidebar.collapsed { width: var(--sidebar-collapsed); }
+        .sidebar-brand {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sidebar-brand-icon {
+            width: 42px; height: 42px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .sidebar-brand-text {
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+        .sidebar.collapsed .sidebar-brand-text { opacity: 0; width: 0; }
+        .sidebar-toggle {
+            position: absolute;
+            top: 24px; right: -14px;
+            width: 28px; height: 28px;
+            background: var(--primary-color);
+            border: 2px solid white;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+            z-index: 1001;
+            transition: transform var(--transition-speed);
+        }
+        .sidebar.collapsed .sidebar-toggle { transform: rotate(180deg); }
+        .sidebar-menu { padding: 16px 12px; }
+        .sidebar-menu-title {
+            color: var(--gray-400);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0 12px;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+        .sidebar.collapsed .sidebar-menu-title { opacity: 0; }
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--gray-400);
+            text-decoration: none;
+            border-radius: 10px;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        .sidebar-item:hover {
+            background: rgba(255,255,255,0.06);
+            color: white;
+        }
+        .sidebar-item.active {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        }
+        .sidebar-item i {
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+        .sidebar-item-text {
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+        .sidebar.collapsed .sidebar-item-text { opacity: 0; width: 0; }
+        .sidebar-badge {
+            margin-left: auto;
+            background: var(--danger-color);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+        .sidebar.collapsed .sidebar-badge {
+            position: absolute;
+            top: 8px; right: 8px;
+            padding: 3px;
+            min-width: 16px; height: 16px;
+            font-size: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar-footer {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 16px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .sidebar-user {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .sidebar-user-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.2);
+            flex-shrink: 0;
+        }
+        .sidebar-user-info {
+            opacity: 1;
+            transition: opacity var(--transition-speed);
+        }
+        .sidebar.collapsed .sidebar-user-info { opacity: 0; width: 0; }
+        .sidebar-user-name {
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .sidebar-user-role {
+            color: var(--gray-400);
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .main-content {
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            transition: margin-left var(--transition-speed) ease;
+        }
+        .sidebar.collapsed ~ .main-content { margin-left: var(--sidebar-collapsed); }
+        .admin-header {
+            height: var(--header-height);
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .header-search {
+            position: relative;
+            width: 360px;
+        }
+        .header-search input {
+            width: 100%;
+            padding: 10px 16px 10px 44px;
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            background: var(--gray-50);
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .header-search input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .header-search i {
+            position: absolute;
+            left: 16px; top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            font-size: 16px;
+        }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .header-btn {
+            width: 42px; height: 42px;
+            border-radius: 10px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            color: var(--gray-600);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        .header-btn:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-300);
+            color: var(--gray-800);
+        }
+        .header-btn .badge {
+            position: absolute;
+            top: -2px; right: -2px;
+            background: var(--danger-color);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            width: 18px; height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header-divider {
+            width: 1px; height: 32px;
+            background: var(--gray-200);
+            margin: 0 4px;
+        }
+        .header-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+        .header-profile:hover { background: var(--gray-50); }
+        .header-profile img {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .header-profile-info { text-align: left; }
+        .header-profile-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--gray-800);
+        }
+        .header-profile-role {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+        .dashboard-content { padding: 28px; }
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+        .page-subtitle {
+            color: var(--gray-500);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .breadcrumb-custom {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 12px 20px;
+            margin-bottom: 24px;
+            border: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        .breadcrumb-custom a {
+            color: var(--gray-500);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .breadcrumb-custom a:hover { color: var(--primary-color); }
+        .breadcrumb-custom .active {
+            color: var(--gray-800);
+            font-weight: 600;
+        }
+        .breadcrumb-custom i { color: var(--gray-400); font-size: 12px; }
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 28px;
+        }
+        .stat-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px; height: 100%;
+            background: var(--primary-color);
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .stat-card.revenue::before { background: var(--primary-color); }
+        .stat-card.transactions::before { background: var(--secondary-color); }
+        .stat-card.pending::before { background: var(--warning-color); }
+        .stat-card.refunded::before { background: var(--danger-color); }
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        .stat-icon {
+            width: 48px; height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+        .stat-card.revenue .stat-icon { background: var(--primary-light); color: var(--primary-color); }
+        .stat-card.transactions .stat-icon { background: #ede9fe; color: var(--secondary-color); }
+        .stat-card.pending .stat-icon { background: #fef3c7; color: var(--warning-color); }
+        .stat-card.refunded .stat-icon { background: #fee2e2; color: var(--danger-color); }
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 20px;
+        }
+        .stat-trend.up { background: #d1fae5; color: var(--success-color); }
+        .stat-trend.down { background: #fee2e2; color: var(--danger-color); }
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gray-900);
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            color: var(--gray-500);
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .filter-bar {
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .filter-bar .form-select,
+        .filter-bar .form-control {
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 14px;
+            padding: 8px 12px;
+            min-width: 160px;
+        }
+        .filter-bar .form-select:focus,
+        .filter-bar .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .filter-bar .btn {
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 16px;
+        }
+        .table-card {
+            background: white;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+        .table-responsive { overflow-x: auto; }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .data-table thead th {
+            background: var(--gray-50);
+            padding: 14px 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--gray-500);
+            border-bottom: 1px solid var(--gray-200);
+            white-space: nowrap;
+        }
+        .data-table tbody td {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-100);
+            vertical-align: middle;
+        }
+        .data-table tbody tr:hover { background: var(--gray-50); }
+        .data-table tbody tr:last-child td { border-bottom: none; }
+        .transaction-id {
+            font-family: 'SF Mono', monospace;
+            font-weight: 600;
+            color: var(--primary-color);
+            font-size: 13px;
+        }
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .status-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+        }
+        .status-badge.completed { background: #d1fae5; color: #065f46; }
+        .status-badge.completed::before { background: #10b981; }
+        .status-badge.pending { background: #fef3c7; color: #92400e; }
+        .status-badge.pending::before { background: #f59e0b; }
+        .status-badge.processing { background: #dbeafe; color: #1e40af; }
+        .status-badge.processing::before { background: #3b82f6; }
+        .status-badge.failed { background: #fee2e2; color: #991b1b; }
+        .status-badge.failed::before { background: #ef4444; }
+        .status-badge.refunded { background: #ede9fe; color: #5b21b6; }
+        .status-badge.refunded::before { background: #7c3aed; }
+        .payment-method {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .payment-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+        .payment-icon.visa { background: #1a1f71; color: white; }
+        .payment-icon.mastercard { background: #eb001b; color: white; }
+        .payment-icon.paypal { background: #003087; color: white; }
+        .payment-icon.cash { background: var(--success-color); color: white; }
+        .payment-icon.bank { background: var(--gray-700); color: white; }
+        .table-actions { display: flex; gap: 6px; }
+        .table-action-btn {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            color: var(--gray-500);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+        .table-action-btn:hover {
+            background: var(--gray-100);
+            color: var(--gray-800);
+        }
+        .table-action-btn.delete:hover {
+            background: #fee2e2;
+            color: var(--danger-color);
+            border-color: #fecaca;
+        }
+        .pagination-custom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .pagination-info {
+            font-size: 14px;
+            color: var(--gray-500);
+        }
+        .pagination-nav {
+            display: flex;
+            gap: 4px;
+        }
+        .pagination-nav button {
+            min-width: 36px; height: 36px;
+            border-radius: 8px;
+            border: 1px solid var(--gray-200);
+            background: white;
+            color: var(--gray-600);
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .pagination-nav button:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-300);
+        }
+        .pagination-nav button.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        .pagination-nav button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        @media (max-width: 991px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.mobile-open { transform: translateX(0); }
+            .main-content { margin-left: 0; }
+            .sidebar.collapsed ~ .main-content { margin-left: 0; }
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+            .mobile-overlay.active { display: block; }
+            .header-search { width: 200px; }
+            .stats-row { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .filter-bar { flex-direction: column; align-items: stretch; }
+            .filter-bar .form-select,
+            .filter-bar .form-control { width: 100%; min-width: auto; }
+            .pagination-custom { flex-direction: column; gap: 12px; align-items: center; }
+        }
+        @media (max-width: 576px) {
+            .dashboard-content { padding: 16px; }
+            .page-title { font-size: 22px; }
+            .admin-header { padding: 0 16px; }
+            .header-search { display: none; }
+            .header-profile-info { display: none; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in { animation: fadeInUp 0.5s ease forwards; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--gray-100); }
+        ::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gray-400); }
+        .amount-positive { color: var(--success-color); font-weight: 600; }
+        .amount-negative { color: var(--danger-color); font-weight: 600; }
+    </style>
+
+</head>
+<body>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-toggle" id="sidebarToggle"><i class="bi bi-chevron-left"></i></div>
+    <div class="sidebar-brand">
+        <div class="sidebar-brand-icon"><i class="bi bi-cpu"></i></div>
+        <span class="sidebar-brand-text">HimaTech</span>
+    </div>
+    <nav class="sidebar-menu">
+        <div class="sidebar-menu-title">Main</div>
+        <a href="dashboard.html" class="sidebar-item"><i class="bi bi-grid-1x2-fill"></i><span class="sidebar-item-text">Dashboard</span></a>
+        <a href="orders.html" class="sidebar-item"><i class="bi bi-bag-check"></i><span class="sidebar-item-text">Orders</span><span class="sidebar-badge">24</span></a>
+        <a href="products.html" class="sidebar-item"><i class="bi bi-box-seam"></i><span class="sidebar-item-text">Products</span></a>
+        <a href="customers.html" class="sidebar-item"><i class="bi bi-people"></i><span class="sidebar-item-text">Customers</span></a>
+        <div class="sidebar-menu-title">Management</div>
+        <a href="categories.html" class="sidebar-item"><i class="bi bi-tags"></i><span class="sidebar-item-text">Categories</span></a>
+        <a href="inventory.html" class="sidebar-item"><i class="bi bi-archive"></i><span class="sidebar-item-text">Inventory</span></a>
+        <a href="reviews.html" class="sidebar-item"><i class="bi bi-star"></i><span class="sidebar-item-text">Reviews</span><span class="sidebar-badge">8</span></a>
+        <div class="sidebar-menu-title">Finance</div>
+        <a href="transactions.html" class="sidebar-item active"><i class="bi bi-credit-card"></i><span class="sidebar-item-text">Transactions</span></a>
+        <a href="reports.html" class="sidebar-item"><i class="bi bi-graph-up-arrow"></i><span class="sidebar-item-text">Reports</span></a>
+        <div class="sidebar-menu-title">System</div>
+        <a href="settings.html" class="sidebar-item"><i class="bi bi-gear"></i><span class="sidebar-item-text">Settings</span></a>
+        <a href="../pages/index.html" class="sidebar-item" target="_blank"><i class="bi bi-shop"></i><span class="sidebar-item-text">View Store</span></a>
+    </nav>
+    
+</aside>
+<main class="main-content">
+    <header class="admin-header">
+        <div class="header-search">
+            <i class="bi bi-search"></i>
+            <input type="text" placeholder="Search transactions, orders..." id="headerSearch">
+        </div>
+        <div class="header-actions">
+            <button class="header-btn" id="themeToggle" title="Toggle Theme"><i class="bi bi-moon"></i></button>
+            <button class="header-btn" id="notificationsBtn" title="Notifications"><i class="bi bi-bell"></i><span class="badge">5</span></button>
+            <button class="header-btn d-lg-none" id="mobileMenuBtn" title="Menu"><i class="bi bi-list"></i></button>
+            <div class="header-divider d-none d-md-block"></div>
+            <div class="header-profile" id="profileDropdown">
+                <img src="../images/wishlist/ahmad.jpeg" alt="Admin" onerror="this.src='https://via.placeholder.com/80x80/2563eb/ffffff?text=AD'">
+                <div class="header-profile-info d-none d-md-block">
+                    <div class="header-profile-name">Ahmad Darwish</div>
+                    <div class="header-profile-role">Super Admin</div>
+                </div>
+                <i class="bi bi-chevron-down d-none d-md-block" style="color: var(--gray-400); font-size: 12px;"></i>
+            </div>
+        </div>
+    </header>
+    <div class="dashboard-content">
+        <h1 class="page-title animate-fade-in">Transactions</h1>
+        <p class="page-subtitle animate-fade-in">Manage and track all payment transactions.</p>
+        <div class="breadcrumb-custom animate-fade-in delay-1">
+            <a href="dashboard.html"><i class="bi bi-house-door me-1"></i>Dashboard</a>
+            <i class="bi bi-chevron-right"></i>
+            <a href="transactions.html">Finance</a>
+            <i class="bi bi-chevron-right"></i>
+            <span class="active">Transactions</span>
+        </div>
+        <div class="stats-row">
+            <div class="stat-card revenue animate-fade-in delay-1">
+                <div class="stat-header">
+                    <div class="stat-icon"><i class="bi bi-currency-dollar"></i></div>
+                    <div class="stat-trend up"><i class="bi bi-arrow-up-short"></i>15.3%</div>
+                </div>
+                <div class="stat-value">$124,850</div>
+                <div class="stat-label">Total Revenue</div>
+            </div>
+            <div class="stat-card transactions animate-fade-in delay-2">
+                <div class="stat-header">
+                    <div class="stat-icon"><i class="bi bi-credit-card"></i></div>
+                    <div class="stat-trend up"><i class="bi bi-arrow-up-short"></i>9.7%</div>
+                </div>
+                <div class="stat-value">2,847</div>
+                <div class="stat-label">Total Transactions</div>
+            </div>
+            <div class="stat-card pending animate-fade-in delay-3">
+                <div class="stat-header">
+                    <div class="stat-icon"><i class="bi bi-hourglass-split"></i></div>
+                    <div class="stat-trend down"><i class="bi bi-arrow-down-short"></i>2.1%</div>
+                </div>
+                <div class="stat-value">$8,420</div>
+                <div class="stat-label">Pending Amount</div>
+            </div>
+            <div class="stat-card refunded animate-fade-in delay-4">
+                <div class="stat-header">
+                    <div class="stat-icon"><i class="bi bi-arrow-counterclockwise"></i></div>
+                    <div class="stat-trend down"><i class="bi bi-arrow-down-short"></i>5.4%</div>
+                </div>
+                <div class="stat-value">$3,180</div>
+                <div class="stat-label">Refunded Amount</div>
+            </div>
+        </div>
+        <div class="filter-bar animate-fade-in delay-2">
+            <div class="d-flex align-items-center gap-2 flex-wrap w-100">
+                <select class="form-select" id="statusFilter" style="max-width:160px;">
+                    <option value="">All Status</option>
+                    <option value="completed">Completed</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="failed">Failed</option>
+                    <option value="refunded">Refunded</option>
+                </select>
+                <select class="form-select" id="methodFilter" style="max-width:160px;">
+                    <option value="">All Methods</option>
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">Mastercard</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="cash">Cash on Delivery</option>
+                    <option value="bank">Bank Transfer</option>
+                </select>
+                <input type="date" class="form-control" id="dateFrom" style="max-width:160px;">
+                <input type="date" class="form-control" id="dateTo" style="max-width:160px;">
+                <input type="text" class="form-control" id="searchFilter" placeholder="Search by ID, customer..." style="max-width:260px;">
+                <button class="btn btn-primary" id="applyFilters"><i class="bi bi-funnel me-1"></i>Filter</button>
+                <button class="btn btn-outline-secondary" id="resetFilters"><i class="bi bi-x-lg me-1"></i>Reset</button>
+            </div>
+        </div>
+        <div class="table-card animate-fade-in delay-3">
+            <div class="table-responsive">
+                <table class="data-table" id="transactionsTable">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="form-check-input" id="selectAll"></th>
+                            <th>Transaction ID</th>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Date</th>
+                            <th>Payment Method</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98452</span></td>
+                            <td><strong>#ORD-7521</strong></td>
+                            <td>Omar Hassan</td>
+                            <td>Jul 01, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon visa"><i class="bi bi-credit-card"></i></div><span>Visa ****4242</span></div></td>
+                            <td><span class="amount-positive">+$2,499</span></td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98451</span></td>
+                            <td><strong>#ORD-7520</strong></td>
+                            <td>Layla Ahmad</td>
+                            <td>Jul 01, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon mastercard"><i class="bi bi-credit-card"></i></div><span>MC ****8891</span></div></td>
+                            <td><span class="amount-positive">+$1,199</span></td>
+                            <td><span class="status-badge processing">Processing</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98450</span></td>
+                            <td><strong>#ORD-7519</strong></td>
+                            <td>Khaled Mahmoud</td>
+                            <td>Jun 30, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon paypal"><i class="bi bi-paypal"></i></div><span>PayPal</span></div></td>
+                            <td><span class="amount-positive">+$379</span></td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98449</span></td>
+                            <td><strong>#ORD-7518</strong></td>
+                            <td>Sara Khalil</td>
+                            <td>Jun 30, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon visa"><i class="bi bi-credit-card"></i></div><span>Visa ****1123</span></div></td>
+                            <td><span class="amount-positive">+$1,599</span></td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98448</span></td>
+                            <td><strong>#ORD-7517</strong></td>
+                            <td>Mohammad Ali</td>
+                            <td>Jun 29, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon cash"><i class="bi bi-cash"></i></div><span>Cash on Delivery</span></div></td>
+                            <td><span class="amount-negative">-$1,099</span></td>
+                            <td><span class="status-badge refunded">Refunded</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Delete"><i class="bi bi-trash"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98447</span></td>
+                            <td><strong>#ORD-7516</strong></td>
+                            <td>Noura Fadi</td>
+                            <td>Jun 29, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon bank"><i class="bi bi-bank"></i></div><span>Bank Transfer</span></div></td>
+                            <td><span class="amount-positive">+$899</span></td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98446</span></td>
+                            <td><strong>#ORD-7515</strong></td>
+                            <td>Youssef Samir</td>
+                            <td>Jun 28, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon mastercard"><i class="bi bi-credit-card"></i></div><span>MC ****5567</span></div></td>
+                            <td><span class="amount-positive">+$2,150</span></td>
+                            <td><span class="status-badge failed">Failed</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Retry"><i class="bi bi-arrow-repeat"></i></button><button class="table-action-btn delete" title="Delete"><i class="bi bi-trash"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98445</span></td>
+                            <td><strong>#ORD-7514</strong></td>
+                            <td>Rana Hisham</td>
+                            <td>Jun 28, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon paypal"><i class="bi bi-paypal"></i></div><span>PayPal</span></div></td>
+                            <td><span class="amount-positive">+$549</span></td>
+                            <td><span class="status-badge completed">Completed</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98444</span></td>
+                            <td><strong>#ORD-7513</strong></td>
+                            <td>Hassan Ibrahim</td>
+                            <td>Jun 27, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon visa"><i class="bi bi-credit-card"></i></div><span>Visa ****7788</span></div></td>
+                            <td><span class="amount-positive">+$3,299</span></td>
+                            <td><span class="status-badge processing">Processing</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="form-check-input row-check"></td>
+                            <td><span class="transaction-id">#TXN-98443</span></td>
+                            <td><strong>#ORD-7512</strong></td>
+                            <td>Fatima Zaid</td>
+                            <td>Jun 27, 2026</td>
+                            <td><div class="payment-method"><div class="payment-icon cash"><i class="bi bi-cash"></i></div><span>Cash on Delivery</span></div></td>
+                            <td><span class="amount-positive">+$129</span></td>
+                            <td><span class="status-badge pending">Pending</span></td>
+                            <td><div class="table-actions"><button class="table-action-btn" title="View"><i class="bi bi-eye"></i></button><button class="table-action-btn" title="Receipt"><i class="bi bi-receipt"></i></button><button class="table-action-btn delete" title="Refund"><i class="bi bi-arrow-counterclockwise"></i></button></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-custom">
+                <div class="pagination-info">Showing 1-10 of 2,847 transactions</div>
+                <div class="pagination-nav">
+                    <button disabled><i class="bi bi-chevron-left"></i></button>
+                    <button class="active">1</button>
+                    <button>2</button>
+                    <button>3</button>
+                    <button>4</button>
+                    <button>5</button>
+                    <button><i class="bi bi-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div class="toast-container position-fixed bottom-0 end-0 p-3" style="z-index:1050;"></div>
+<div class="modal fade" id="refundModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius:var(--border-radius);border:1px solid var(--gray-200);">
+            <div class="modal-header" style="border-bottom:1px solid var(--gray-200);padding:20px 24px;">
+                <h5 class="modal-title fw-bold" style="color:var(--gray-800);"><i class="bi bi-arrow-counterclockwise text-warning me-2"></i>Confirm Refund</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding:24px;">
+                <p style="color:var(--gray-600);font-size:14px;margin-bottom:16px;">Are you sure you want to refund this transaction? This action cannot be undone.</p>
+                <div class="p-3 rounded-3" style="background:var(--gray-50);border:1px solid var(--gray-200);">
+                    <div class="d-flex justify-content-between mb-2"><span style="color:var(--gray-500);font-size:13px;">Transaction ID:</span><span class="fw-semibold" style="color:var(--gray-800);font-size:13px;" id="refundTxnId">#TXN-98452</span></div>
+                    <div class="d-flex justify-content-between mb-2"><span style="color:var(--gray-500);font-size:13px;">Order ID:</span><span class="fw-semibold" style="color:var(--gray-800);font-size:13px;" id="refundOrderId">#ORD-7521</span></div>
+                    <div class="d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Amount:</span><span class="fw-bold" style="color:var(--danger-color);font-size:13px;" id="refundAmount">$2,499</span></div>
+                </div>
+                <div class="mt-3">
+                    <label for="refundReason" class="form-label" style="font-size:13px;color:var(--gray-600);font-weight:500;">Refund Reason (optional)</label>
+                    <textarea class="form-control" id="refundReason" rows="2" placeholder="Enter reason for refund..." style="border-radius:8px;font-size:14px;border-color:var(--gray-200);"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer" style="border-top:1px solid var(--gray-200);padding:16px 24px;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" style="border-radius:8px;font-size:14px;">Cancel</button>
+                <button type="button" class="btn btn-warning" id="confirmRefundBtn" style="border-radius:8px;font-size:14px;font-weight:600;"><i class="bi bi-arrow-counterclockwise me-1"></i>Confirm Refund</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="viewTransactionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content" style="border-radius:var(--border-radius);border:1px solid var(--gray-200);">
+            <div class="modal-header" style="border-bottom:1px solid var(--gray-200);padding:20px 24px;">
+                <h5 class="modal-title fw-bold" style="color:var(--gray-800);"><i class="bi bi-receipt text-primary me-2"></i>Transaction Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="padding:24px;" id="viewTransactionBody"></div>
+            <div class="modal-footer" style="border-top:1px solid var(--gray-200);padding:16px 24px;">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" style="border-radius:8px;font-size:14px;">Close</button>
+                <button type="button" class="btn btn-primary" style="border-radius:8px;font-size:14px;font-weight:600;"><i class="bi bi-download me-1"></i>Download Receipt</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    sidebarToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+    });
+    mobileMenuBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('mobile-open');
+        mobileOverlay.classList.toggle('active');
+    });
+    mobileOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('mobile-open');
+        mobileOverlay.classList.remove('active');
+    });
+    if (localStorage.getItem('sidebarCollapsed') === 'true' && window.innerWidth > 991) {
+        sidebar.classList.add('collapsed');
+    }
+    const headerSearch = document.getElementById('headerSearch');
+    headerSearch.addEventListener('input', function() {
+        const query = this.value.toLowerCase().trim();
+        if (query.length > 2) showToast('Searching for: ' + query, 'info');
+    });
+    headerSearch.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') showToast('Search results for: ' + this.value, 'info');
+    });
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = themeToggle.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+            icon.classList.replace('bi-moon', 'bi-sun');
+            showToast('Dark mode enabled', 'info');
+        } else {
+            icon.classList.replace('bi-sun', 'bi-moon');
+            showToast('Light mode enabled', 'info');
+        }
+    });
+    document.getElementById('notificationsBtn').addEventListener('click', () => {
+        showToast('You have 5 new notifications', 'info');
+    });
+    document.getElementById('profileDropdown').addEventListener('click', () => {
+        showToast('Profile menu clicked', 'info');
+    });
+    const selectAll = document.getElementById('selectAll');
+    const rowChecks = document.querySelectorAll('.row-check');
+    selectAll.addEventListener('change', function() {
+        rowChecks.forEach(cb => cb.checked = this.checked);
+        const count = this.checked ? rowChecks.length : 0;
+        if (count > 0) showToast(count + ' transactions selected', 'info');
+    });
+    rowChecks.forEach(cb => {
+        cb.addEventListener('change', function() {
+            const checked = document.querySelectorAll('.row-check:checked').length;
+            selectAll.checked = checked === rowChecks.length;
+        });
+    });
+    document.getElementById('applyFilters').addEventListener('click', () => {
+        showToast('Filters applied', 'success');
+    });
+    document.getElementById('resetFilters').addEventListener('click', () => {
+        document.getElementById('statusFilter').value = '';
+        document.getElementById('methodFilter').value = '';
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+        document.getElementById('searchFilter').value = '';
+        showToast('Filters reset', 'info');
+    });
+    const refundModal = new bootstrap.Modal(document.getElementById('refundModal'));
+    const viewTransactionModal = new bootstrap.Modal(document.getElementById('viewTransactionModal'));
+    document.querySelectorAll('.table-action-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const action = this.getAttribute('title');
+            const row = this.closest('tr');
+            const txnId = row.querySelector('.transaction-id').textContent;
+            const orderId = row.querySelector('td:nth-child(3) strong').textContent;
+            const amount = row.querySelector('td:nth-child(7)').textContent.trim();
+            if (action === 'Refund') {
+                document.getElementById('refundTxnId').textContent = txnId;
+                document.getElementById('refundOrderId').textContent = orderId;
+                document.getElementById('refundAmount').textContent = amount;
+                refundModal.show();
+            } else if (action === 'View') {
+                const customer = row.querySelector('td:nth-child(4)').textContent;
+                const date = row.querySelector('td:nth-child(5)').textContent;
+                const method = row.querySelector('td:nth-child(6)').textContent.trim();
+                const status = row.querySelector('.status-badge').textContent;
+                const statusClass = row.querySelector('.status-badge').classList[1];
+                document.getElementById('viewTransactionBody').innerHTML = `
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3" style="background:var(--gray-50);border:1px solid var(--gray-200);">
+                                <h6 class="fw-bold mb-3" style="color:var(--gray-700);font-size:14px;">Transaction Info</h6>
+                                <div class="mb-2 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Transaction ID</span><span class="fw-semibold" style="font-size:13px;">${txnId}</span></div>
+                                <div class="mb-2 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Order ID</span><span class="fw-semibold" style="font-size:13px;">${orderId}</span></div>
+                                <div class="mb-2 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Date</span><span class="fw-semibold" style="font-size:13px;">${date}</span></div>
+                                <div class="mb-0 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Status</span><span class="status-badge ${statusClass}">${status}</span></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="p-3 rounded-3" style="background:var(--gray-50);border:1px solid var(--gray-200);">
+                                <h6 class="fw-bold mb-3" style="color:var(--gray-700);font-size:14px;">Payment Details</h6>
+                                <div class="mb-2 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Customer</span><span class="fw-semibold" style="font-size:13px;">${customer}</span></div>
+                                <div class="mb-2 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Method</span><span class="fw-semibold" style="font-size:13px;">${method}</span></div>
+                                <div class="mb-2 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Amount</span><span class="fw-bold" style="font-size:13px;color:var(--primary-color);">${amount}</span></div>
+                                <div class="mb-0 d-flex justify-content-between"><span style="color:var(--gray-500);font-size:13px;">Currency</span><span class="fw-semibold" style="font-size:13px;">USD ($)</span></div>
+                            </div>
+                        </div>
+                    </div>`;
+                viewTransactionModal.show();
+            } else if (action === 'Delete') {
+                if (confirm('Are you sure you want to delete transaction ' + txnId + '?')) {
+                    row.style.transition = 'all 0.3s';
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(20px)';
+                    setTimeout(() => row.remove(), 300);
+                    showToast('Transaction ' + txnId + ' deleted successfully', 'success');
+                }
+            } else if (action === 'Receipt') {
+                showToast('Downloading receipt for ' + txnId, 'info');
+            } else if (action === 'Retry') {
+                showToast('Retrying transaction ' + txnId, 'info');
+            }
+        });
+    });
+    document.getElementById('confirmRefundBtn').addEventListener('click', function() {
+        const txnId = document.getElementById('refundTxnId').textContent;
+        refundModal.hide();
+        showToast('Refund initiated for ' + txnId, 'success');
+    });
+    document.querySelectorAll('.pagination-nav button').forEach(btn => {
+        btn.addEventListener('click', function() {
+            if (this.disabled) return;
+            const text = this.textContent.trim();
+            if (text !== '' && !isNaN(text)) {
+                document.querySelectorAll('.pagination-nav button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                showToast('Page ' + text + ' loaded', 'info');
+            }
+        });
+    });
+    function showToast(message, type) {
+        const container = document.querySelector('.toast-container');
+        const toast = document.createElement('div');
+        const icons = { success: 'bi-check-circle-fill', error: 'bi-x-circle-fill', warning: 'bi-exclamation-triangle-fill', info: 'bi-info-circle-fill' };
+        const colors = { success: '#10b981', error: '#ef4444', warning: '#f59e0b', info: '#2563eb' };
+        toast.className = 'toast show';
+        toast.style.cssText = 'background:white;border-radius:12px;padding:16px 20px;margin-bottom:12px;box-shadow:0 10px 15px -3px rgba(0,0,0,0.1);border-left:4px solid ' + colors[type] + ';display:flex;align-items:center;gap:12px;min-width:300px;animation:slideInRight 0.3s ease;';
+        toast.innerHTML = '<i class="bi ' + icons[type] + '" style="color:' + colors[type] + ';font-size:20px;"></i><span style="font-size:14px;color:#334155;font-weight:500;">' + message + '</span><button style="margin-left:auto;background:none;border:none;color:#94a3b8;cursor:pointer;font-size:18px;" onclick="this.parentElement.remove()"><i class="bi bi-x"></i></button>';
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOutRight 0.3s ease forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            headerSearch.focus();
+        }
+        if (e.key === 'Escape') {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+        }
+    });
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 991) {
+            sidebar.classList.remove('mobile-open');
+            mobileOverlay.classList.remove('active');
+        }
+    });
+    const style = document.createElement('style');
+    style.textContent = '@keyframes slideInRight{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}@keyframes slideOutRight{from{transform:translateX(0);opacity:1;}to{transform:translateX(100%);opacity:0;}}';
+    document.head.appendChild(style);
+    setTimeout(() => { showToast('Transactions page loaded successfully', 'success'); }, 1000);
+</script>
+</body>
+</html>

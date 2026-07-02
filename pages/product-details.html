@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <meta name="description" content="View product details, specifications, reviews and more at HimaTech-Store - Syria's leading tech e-commerce store.">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f97316;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== HEADER ===== */
+        .top-bar {
+            background-color: var(--dark-color);
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+        .top-bar a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+        .top-bar a:hover { color: #fff; }
+        .top-bar i { font-size: 0.875rem; margin-right: 4px; }
+
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--primary-color) !important;
+            letter-spacing: -0.5px;
+        }
+        .navbar-brand span { color: var(--secondary-color); }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .header-icons .btn {
+            color: var(--dark-color);
+            position: relative;
+            transition: color 0.3s;
+        }
+        .header-icons .btn:hover {
+            color: var(--primary-color);
+        }
+
+        .header-icons {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .header-icons .btn-link {
+            color: var(--dark-color);
+            padding: 0.25rem 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .header-icons .btn-link:hover {
+            color: var(--primary-color);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+        }
+        .search-box input {
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 45px;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-section {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #334155 100%);
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .breadcrumb-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .breadcrumb-title {
+            color: #fff;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            background: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb-item a { color: #94a3b8; text-decoration: none; transition: all 0.3s; }
+        .breadcrumb-item a:hover { color: #fff; }
+        .breadcrumb-item.active { color: var(--primary-color); font-weight: 500; }
+        .breadcrumb-item + .breadcrumb-item::before { color: #64748b; }
+
+        /* ===== PRODUCT DETAILS ===== */
+        .product-details-section { padding: 60px 0; }
+
+        .product-gallery {
+            background: #fff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .main-image-container {
+            position: relative;
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+
+        .main-image-container img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            transition: transform 0.5s ease;
+        }
+
+        .main-image-container:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-zoom-overlay {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255,255,255,0.9);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .image-zoom-overlay:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .product-badges {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .badge-custom {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .badge-sale {
+            background: var(--danger-color);
+            color: #fff;
+        }
+
+        .badge-new {
+            background: var(--success-color);
+            color: #fff;
+        }
+
+        .badge-hot {
+            background: var(--accent-color);
+            color: #fff;
+        }
+
+        .thumbnail-images {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .thumbnail-item {
+            min-width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            background: #f8fafc;
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        .thumbnail-item:hover,
+        .thumbnail-item.active {
+            border-color: var(--primary-color);
+        }
+
+        /* Product Info */
+        .product-info-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-md);
+            height: 100%;
+        }
+
+        .product-category {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .product-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+        }
+
+        .rating-count {
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            display: flex;
+            align-items: baseline;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .current-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .old-price {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            background: var(--danger-color);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .product-short-desc {
+            color: #64748b;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        /* Product Options */
+        .product-options {
+            margin-bottom: 25px;
+        }
+
+        .option-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .color-option {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .color-option:hover,
+        .color-option.active {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .color-option.active::after {
+            content: '\F26E';
+            font-family: 'bootstrap-icons';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 0.9rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .storage-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .storage-option {
+            padding: 8px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            background: #fff;
+        }
+
+        .storage-option:hover,
+        .storage-option.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Quantity & Actions */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        .quantity-selector button {
+            width: 40px;
+            height: 44px;
+            border: none;
+            background: #f8fafc;
+            color: var(--dark-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .quantity-selector button:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .quantity-selector input {
+            width: 60px;
+            height: 44px;
+            border: none;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-add-cart {
+            flex: 1;
+            min-width: 200px;
+            padding: 14px 30px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-add-cart:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-wishlist {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .btn-wishlist:hover,
+        .btn-wishlist.active {
+            border-color: var(--danger-color);
+            color: var(--danger-color);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        .btn-compare {
+            width: 54px;
+            height: 54px;
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            background: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .btn-compare:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        /* Product Meta */
+        .product-meta {
+            margin-top: 25px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .meta-item strong {
+            color: var(--dark-color);
+        }
+
+        /* Share */
+        .product-share {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .product-share span {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .share-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .share-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .share-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .share-fb { background: #1877f2; }
+        .share-tw { background: #1da1f2; }
+        .share-wa { background: #25d366; }
+        .share-tg { background: #0088cc; }
+
+        /* ===== TABS ===== */
+        .product-tabs-section { padding-bottom: 60px; }
+
+        .nav-tabs-custom {
+            border-bottom: 2px solid var(--border-color);
+            gap: 5px;
+        }
+
+        .nav-tabs-custom .nav-link {
+            border: none;
+            border-bottom: 3px solid transparent;
+            padding: 15px 25px !important;
+            font-weight: 600;
+            color: var(--secondary-color) !important;
+            background: transparent;
+            margin-bottom: -2px;
+        }
+
+        .nav-tabs-custom .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-tabs-custom .nav-link.active {
+            color: var(--primary-color) !important;
+            border-bottom-color: var(--primary-color);
+            background: transparent;
+        }
+
+        .tab-content-custom {
+            background: #fff;
+            border-radius: 0 0 16px 16px;
+            padding: 35px;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Description Tab */
+        .description-content h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .description-content h3:first-child {
+            margin-top: 0;
+        }
+
+        .description-content p {
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .description-content ul {
+            padding-left: 20px;
+            color: #64748b;
+        }
+
+        .description-content ul li {
+            margin-bottom: 8px;
+            line-height: 1.8;
+        }
+
+        .feature-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: var(--transition);
+            height: 100%;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-box i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-box h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .feature-box p {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            margin-bottom: 0;
+        }
+
+        /* Specifications Tab */
+        .specs-table {
+            width: 100%;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .specs-table td {
+            padding: 15px 20px;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 600;
+            color: var(--dark-color);
+            width: 30%;
+            background: #f8fafc;
+        }
+
+        .specs-table td:last-child {
+            color: #64748b;
+        }
+
+        /* Reviews Tab */
+        .review-summary {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .review-summary .big-rating {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--dark-color);
+            line-height: 1;
+        }
+
+        .review-summary .rating-stars {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin: 10px 0;
+        }
+
+        .rating-bars {
+            margin-top: 20px;
+        }
+
+        .rating-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .rating-bar-item span {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            min-width: 30px;
+        }
+
+        .progress {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #e2e8f0;
+        }
+
+        .review-card {
+            border-bottom: 1px solid var(--border-color);
+            padding: 25px 0;
+        }
+
+        .review-card:last-child {
+            border-bottom: none;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reviewer-name {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 2px;
+        }
+
+        .review-date {
+            font-size: 0.85rem;
+            color: var(--secondary-color);
+        }
+
+        .review-text {
+            color: #64748b;
+            margin-top: 10px;
+            line-height: 1.7;
+        }
+
+        .review-images {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .review-images img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .review-images img:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-write-review {
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-write-review:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Write Review Form */
+        .review-form {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .star-rating-input {
+            display: flex;
+            gap: 5px;
+            font-size: 1.5rem;
+            color: #e2e8f0;
+            cursor: pointer;
+        }
+
+        .star-rating-input i:hover,
+        .star-rating-input i.active {
+            color: var(--accent-color);
+        }
+
+        /* Related Products */
+        .related-section { padding: 60px 0; background: #fff; }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .product-card .card-img-wrapper {
+            position: relative;
+            background: #f8fafc;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .product-card .card-img-wrapper img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .card-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .card-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: var(--transition);
+        }
+
+        .product-card:hover .card-actions {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .card-actions button {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: #fff;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .card-actions button:hover {
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .product-card .card-body {
+            padding: 20px;
+        }
+
+        .product-card .card-category {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-card .card-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 8px 0;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .product-card .card-price {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .product-card .price-current {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .product-card .price-old {
+            font-size: 0.9rem;
+            color: var(--secondary-color);
+            text-decoration: line-through;
+        }
+
+        .product-card .card-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .product-card .card-rating i {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+        }
+
+        .product-card .card-rating span {
+            font-size: 0.8rem;
+            color: var(--secondary-color);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--dark-color);
+            color: #cbd5e1;
+            padding-top: 70px;
+        }
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .footer-brand span {
+            color: var(--secondary-color);
+        }
+        .footer-about p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        .footer-links a i {
+            font-size: 0.8rem;
+        }
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        .footer-contact i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .payment-methods img:hover {
+            opacity: 1;
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        .custom-toast {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+        .toast-success .toast-icon {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: var(--success-color);
+        }
+        .toast-error .toast-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+        .toast-info .toast-icon {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+        }
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        .scroll-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== NEWSLETTER ===== */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+        }
+        .newsletter-content h2 {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .newsletter-content p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .newsletter-form {
+            display: flex;
+            gap: 10px;
+            max-width: 500px;
+        }
+        .newsletter-form input {
+            flex: 1;
+            padding: 14px 25px;
+            border-radius: 50px;
+            border: none;
+            outline: none;
+        }
+        .newsletter-form button {
+            padding: 14px 35px;
+            border-radius: 50px;
+            border: none;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .newsletter-form button:hover {
+            background-color: #ea580c;
+        }
+
+        /* ===== MODALS ===== */
+        .modal-content {
+            border: none;
+            border-radius: 16px;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 25px;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .modal-body {
+            padding: 25px;
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 15px 25px;
+        }
+
+        .btn-modal-cancel {
+            padding: 10px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: #fff;
+            color: var(--secondary-color);
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-modal-cancel:hover {
+            background: #f8fafc;
+        }
+
+        .btn-modal-confirm {
+            padding: 10px 25px;
+            border-radius: 8px;
+            border: none;
+            background: var(--danger-color);
+            color: #fff;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .btn-modal-confirm:hover {
+            background: #dc2626;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991px) {
+            .product-title {
+                font-size: 1.4rem;
+            }
+            
+            .main-image-container img {
+                height: 350px;
+            }
+            
+            .navbar-collapse {
+                background: #fff;
+                padding: 20px;
+                border-radius: 12px;
+                box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .btn-add-cart {
+                width: 100%;
+            }
+            
+            .tab-content-custom {
+                padding: 20px;
+            }
+            
+            .specs-table td:first-child {
+                width: 40%;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+
+
+
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span><i class="bi bi-telephone-fill me-2"></i>+963 988 123 456</span>
+                    <span class="ms-4"><i class="bi bi-envelope-fill me-2"></i>info@himatech-store.com</span>
+                </div>
+                <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                    <a href="#" class="me-3"><i class="bi bi-geo-alt-fill me-1"></i>Damascus, Syria</a>
+                    <a href="404.html" class="me-3">Track Order</a>
+                    <a href="login.html">Login</a>
+                    <span class="mx-2">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== HEADER / NAVBAR ===== -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Hima<span>Tech</span></a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <div class="search-box mx-lg-auto my-3 my-lg-0 d-none d-lg-block">
+                        <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                        <button type="button" onclick="handleSearch()"><i class="bi bi-search"></i></button>
+                    </div>
+                    
+                    <ul class="navbar-nav ms-lg-4 mb-2 mb-lg-0 align-items-lg-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="header-icons ms-lg-4 d-flex align-items-center gap-2">
+                        <a href="wishlist.html" class="btn btn-link position-relative text-decoration-none" title="Wishlist">
+                            <i class="bi bi-heart fs-5"></i>
+                            <span class="badge-count" id="wishlistCount">3</span>
+                        </a>
+                        <a href="cart.html" class="btn btn-link position-relative text-decoration-none" title="Cart">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span class="badge-count" id="cartCount">2</span>
+                        </a>
+                        <a href="user-profile.html" class="btn btn-link text-decoration-none" title="My Account">
+                            <i class="bi bi-person fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="breadcrumb-title">Product Details</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="shop.html">Shop</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">MacBook Pro 14" M3 Pro</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT DETAILS ===== -->
+    <section class="product-details-section">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Product Gallery -->
+                <div class="col-lg-5">
+                    <div class="product-gallery">
+                        <div class="main-image-container" id="mainImageContainer">
+                            <img src="../images/product/MacBook Pro 14.jpeg" 
+                                 alt="MacBook Pro 14" 
+                                 id="mainImage"
+                                 onerror="this.src='https://via.placeholder.com/600x600/e2e8f0/64748b?text=No+Image'">
+                            <div class="image-zoom-overlay" onclick="openImageModal()">
+                                <i class="bi bi-zoom-in"></i>
+                            </div>
+                            <div class="product-badges">
+                                <span class="badge-custom badge-sale">-15%</span>
+                                <span class="badge-custom badge-hot"><i class="bi bi-fire me-1"></i>Hot</span>
+                            </div>
+                        </div>
+                        <div class="thumbnail-images">
+                            <div class="thumbnail-item active" onclick="changeImage(this, 'https://via.placeholder.com/600x600/2563eb/ffffff?text=MacBook+Pro+14')">
+                                <img src="../images/product/mar14.jpeg" alt="View 1" onerror="this.src='https://via.placeholder.com/150x150/e2e8f0/64748b?text=No+Image'">
+                            </div>
+                            <div class="thumbnail-item" onclick="changeImage(this, 'https://via.placeholder.com/600x600/1e40af/ffffff?text=Side+View')">
+                                <img src="../images/product/mac14 p.jpeg" alt="View 2" onerror="this.src='https://via.placeholder.com/150x150/e2e8f0/64748b?text=No+Image'">
+                            </div>
+                            <div class="thumbnail-item" onclick="changeImage(this, 'https://via.placeholder.com/600x600/3b82f6/ffffff?text=Back+View')">
+                                <img src="../images/product/mac3.jpeg" alt="View 3" onerror="this.src='https://via.placeholder.com/150x150/e2e8f0/64748b?text=No+Image'">
+                            </div>
+                            <div class="thumbnail-item" onclick="changeImage(this, 'https://via.placeholder.com/600x600/60a5fa/ffffff?text=Ports')">
+                                <img src="../images/product/mac4.jpeg" alt="View 4" onerror="this.src='https://via.placeholder.com/150x150/e2e8f0/64748b?text=No+Image'">
+                            </div>
+                            <div class="thumbnail-item" onclick="changeImage(this, 'https://via.placeholder.com/600x600/93c5fd/ffffff?text=Keyboard')">
+                                <img src="../images/product/mac5.jpeg" alt="View 5" onerror="this.src='https://via.placeholder.com/150x150/e2e8f0/64748b?text=No+Image'">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Info -->
+                <div class="col-lg-7">
+                    <div class="product-info-card">
+                        <div class="product-category">Laptops / Apple</div>
+                        <h1 class="product-title">MacBook Pro 14" with M3 Pro Chip - 18GB RAM - 512GB SSD</h1>
+                        
+                        <div class="product-rating">
+                            <div class="stars">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                            </div>
+                            <span class="rating-count">4.8 (256 Reviews)</span>
+                            <span class="text-muted">|</span>
+                            <span class="text-success"><i class="bi bi-check-circle me-1"></i>In Stock</span>
+                        </div>
+
+                        <div class="product-price">
+                            <span class="current-price">$1,699.00</span>
+                            <span class="old-price">$1,999.00</span>
+                            <span class="discount-badge">Save $300</span>
+                        </div>
+
+                        <p class="product-short-desc">
+                            Experience unprecedented performance with the new MacBook Pro featuring the M3 Pro chip. 
+                            With 18GB unified memory, stunning 14.2" Liquid Retina XDR display, and up to 18 hours 
+                            of battery life. Perfect for professionals who demand the best.
+                        </p>
+
+                        <!-- Color Options -->
+                        <div class="product-options">
+                            <label class="option-label">Color:</label>
+                            <div class="color-options">
+                                <div class="color-option active" style="background: #2d2d2d;" data-color="Space Black" title="Space Black" onclick="selectColor(this)"></div>
+                                <div class="color-option" style="background: #c4c4c4;" data-color="Silver" title="Silver" onclick="selectColor(this)"></div>
+                            </div>
+                            <small class="text-muted" id="selectedColor">Selected: Space Black</small>
+                        </div>
+
+                        <!-- Storage Options -->
+                        <div class="product-options">
+                            <label class="option-label">Storage:</label>
+                            <div class="storage-options">
+                                <div class="storage-option active" data-storage="512GB" onclick="selectStorage(this)">512GB SSD</div>
+                                <div class="storage-option" data-storage="1TB" onclick="selectStorage(this)">1TB SSD <span class="text-muted">+ $200</span></div>
+                                <div class="storage-option" data-storage="2TB" onclick="selectStorage(this)">2TB SSD <span class="text-muted">+ $600</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="product-options">
+                            <label class="option-label">Quantity:</label>
+                            <div class="quantity-selector">
+                                <button onclick="updateQuantity(-1)"><i class="bi bi-dash"></i></button>
+                                <input type="number" value="1" min="1" max="10" id="quantityInput" onchange="validateQuantity()">
+                                <button onclick="updateQuantity(1)"><i class="bi bi-plus"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="product-actions">
+                            <button class="btn-add-cart" onclick="addToCart()">
+                                <i class="bi bi-cart-plus"></i>
+                                Add to Cart
+                            </button>
+                            <button class="btn-wishlist" id="wishlistBtn" onclick="toggleWishlist()" title="Add to Wishlist">
+                                <i class="bi bi-heart"></i>
+                            </button>
+                            <button class="btn-compare" onclick="addToCompare()" title="Add to Compare">
+                                <i class="bi bi-arrow-left-right"></i>
+                            </button>
+                        </div>
+
+                        <!-- Product Meta -->
+                        <div class="product-meta">
+                            <div class="meta-item">
+                                <i class="bi bi-truck"></i>
+                                <span><strong>Free Shipping</strong> on orders over $500</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-shield-check"></i>
+                                <span><strong>2 Year Warranty</strong> included</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                <span><strong>30-Day Returns</strong> hassle-free</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="bi bi-box-seam"></i>
+                                <span><strong>SKU:</strong> MBPRO14-M3P-512</span>
+                            </div>
+                        </div>
+
+                        <!-- Share -->
+                        <div class="product-share">
+                            <span>Share:</span>
+                            <div class="share-links">
+                                <a href="404.html" class="share-fb" title="Facebook"><i class="bi bi-facebook"></i></a>
+                                <a href="404.html" class="share-tw" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                                <a href="404.html" class="share-wa" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+                                <a href="404.html" class="share-tg" title="Telegram"><i class="bi bi-telegram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCT TABS ===== -->
+    <section class="product-tabs-section">
+        <div class="container">
+            <ul class="nav nav-tabs-custom" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">
+                        <i class="bi bi-file-text me-2"></i>Description
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">
+                        <i class="bi bi-list-check me-2"></i>Specifications
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">
+                        <i class="bi bi-star me-2"></i>Reviews <span class="badge bg-primary ms-1">256</span>
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content tab-content-custom" id="productTabsContent">
+                <!-- Description Tab -->
+                <div class="tab-pane fade show active" id="description" role="tabpanel">
+                    <div class="description-content">
+                        <h3>Overview</h3>
+                        <p>The new MacBook Pro is a beast. The M3 Pro chip brings even greater performance to the most demanding workflows. With up to 12 CPU cores, up to 18 GPU cores, and a 16-core Neural Engine, it handles everything from complex 3D rendering to high-resolution video editing with ease.</p>
+                        
+                        <p>The 14.2-inch Liquid Retina XDR display features Extreme Dynamic Range, over 1000 nits of brightness for stunning HDR content, and pro reference modes. With P3 wide color and True Tone technology, every image looks exactly as intended.</p>
+
+                        <div class="row g-4 mt-3">
+                            <div class="col-md-4">
+                                <div class="feature-box">
+                                    <i class="bi bi-cpu"></i>
+                                    <h4>M3 Pro Chip</h4>
+                                    <p>Up to 12-core CPU and 18-core GPU for pro-level performance</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-box">
+                                    <i class="bi bi-display"></i>
+                                    <h4>Liquid Retina XDR</h4>
+                                    <p>14.2" display with 1000 nits brightness and ProMotion</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-box">
+                                    <i class="bi bi-battery-full"></i>
+                                    <h4>18-Hour Battery</h4>
+                                    <p>All-day battery life for on-the-go productivity</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-box">
+                                    <i class="bi bi-camera-video"></i>
+                                    <h4>1080p Camera</h4>
+                                    <p>Studio-quality mics and six-speaker sound system</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-box">
+                                    <i class="bi bi-usb-symbol"></i>
+                                    <h4>Multiple Ports</h4>
+                                    <p>3x Thunderbolt 4, HDMI, SD card slot, MagSafe 3</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="feature-box">
+                                    <i class="bi bi-wifi"></i>
+                                    <h4>Wi-Fi 6E</h4>
+                                    <p>Next-generation wireless connectivity</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>What's in the Box</h3>
+                        <ul>
+                            <li>14-inch MacBook Pro</li>
+                            <li>96W USB-C Power Adapter</li>
+                            <li>USB-C to MagSafe 3 Cable (2 m)</li>
+                            <li>User Guide & Documentation</li>
+                        </ul>
+
+                        <h3>System Requirements</h3>
+                        <ul>
+                            <li>macOS Sonoma or later</li>
+                            <li>Apple ID (required for some features)</li>
+                            <li>Internet access</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Specifications Tab -->
+                <div class="tab-pane fade" id="specs" role="tabpanel">
+                    <table class="specs-table">
+                        <tr>
+                            <td>Display</td>
+                            <td>14.2-inch Liquid Retina XDR display, 3024x1964 resolution, ProMotion technology up to 120Hz</td>
+                        </tr>
+                        <tr>
+                            <td>Processor</td>
+                            <td>Apple M3 Pro chip with 11-core CPU (5 performance + 6 efficiency cores)</td>
+                        </tr>
+                        <tr>
+                            <td>Graphics</td>
+                            <td>14-core GPU with hardware-accelerated ray tracing</td>
+                        </tr>
+                        <tr>
+                            <td>Neural Engine</td>
+                            <td>16-core Neural Engine for machine learning tasks</td>
+                        </tr>
+                        <tr>
+                            <td>Memory</td>
+                            <td>18GB unified memory (configurable to 36GB or 128GB)</td>
+                        </tr>
+                        <tr>
+                            <td>Storage</td>
+                            <td>512GB SSD (configurable to 1TB, 2TB, 4TB, or 8TB)</td>
+                        </tr>
+                        <tr>
+                            <td>Battery</td>
+                            <td>70-watt-hour lithium-polymer battery, Up to 18 hours Apple TV app movie playback</td>
+                        </tr>
+                        <tr>
+                            <td>Camera</td>
+                            <td>12MP Center Stage camera with 1080p FaceTime HD</td>
+                        </tr>
+                        <tr>
+                            <td>Audio</td>
+                            <td>High-fidelity six-speaker sound system with force-canceling woofers, Spatial Audio</td>
+                        </tr>
+                        <tr>
+                            <td>Keyboard & Trackpad</td>
+                            <td>Backlit Magic Keyboard with Touch ID, Force Touch trackpad</td>
+                        </tr>
+                        <tr>
+                            <td>Wireless</td>
+                            <td>Wi-Fi 6E (802.11ax), Bluetooth 5.3</td>
+                        </tr>
+                        <tr>
+                            <td>Ports</td>
+                            <td>3x Thunderbolt 4 (USB-C), HDMI, SDXC card slot, MagSafe 3, 3.5mm headphone jack</td>
+                        </tr>
+                        <tr>
+                            <td>Dimensions</td>
+                            <td>Height: 1.55 cm, Width: 31.26 cm, Depth: 22.12 cm</td>
+                        </tr>
+                        <tr>
+                            <td>Weight</td>
+                            <td>1.61 kg (3.55 pounds)</td>
+                        </tr>
+                        <tr>
+                            <td>Operating System</td>
+                            <td>macOS Sonoma</td>
+                        </tr>
+                        <tr>
+                            <td>Warranty</td>
+                            <td>1-year limited hardware warranty, 90 days complimentary technical support</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Reviews Tab -->
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4 mb-lg-0">
+                            <div class="review-summary">
+                                <div class="big-rating">4.8</div>
+                                <div class="rating-stars">
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill-half-alt"></i>
+                                </div>
+                                <p class="text-muted mb-0">Based on 256 reviews</p>
+                                
+                                <div class="rating-bars">
+                                    <div class="rating-bar-item">
+                                        <span>5 <i class="bi bi-star-fill" style="font-size:0.7rem;"></i></span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 78%"></div>
+                                        </div>
+                                        <span>198</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>4 <i class="bi bi-star-fill" style="font-size:0.7rem;"></i></span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 15%"></div>
+                                        </div>
+                                        <span>38</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>3 <i class="bi bi-star-fill" style="font-size:0.7rem;"></i></span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 5%"></div>
+                                        </div>
+                                        <span>12</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>2 <i class="bi bi-star-fill" style="font-size:0.7rem;"></i></span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 1%"></div>
+                                        </div>
+                                        <span>5</span>
+                                    </div>
+                                    <div class="rating-bar-item">
+                                        <span>1 <i class="bi bi-star-fill" style="font-size:0.7rem;"></i></span>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" style="width: 1%"></div>
+                                        </div>
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-write-review w-100 mt-3" onclick="toggleReviewForm()">
+                                <i class="bi bi-pencil-square me-2"></i>Write a Review
+                            </button>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <!-- Review Form -->
+                            <div class="review-form" id="reviewForm" style="display: none;">
+                                <h5 class="fw-bold mb-3">Write Your Review</h5>
+                                <form onsubmit="submitReview(event)">
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Your Rating</label>
+                                        <div class="star-rating-input" id="starRatingInput">
+                                            <i class="bi bi-star" data-rating="1" onclick="setRating(1)"></i>
+                                            <i class="bi bi-star" data-rating="2" onclick="setRating(2)"></i>
+                                            <i class="bi bi-star" data-rating="3" onclick="setRating(3)"></i>
+                                            <i class="bi bi-star" data-rating="4" onclick="setRating(4)"></i>
+                                            <i class="bi bi-star" data-rating="5" onclick="setRating(5)"></i>
+                                        </div>
+                                        <input type="hidden" id="ratingValue" value="0">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Review Title</label>
+                                        <input type="text" class="form-control" placeholder="Summarize your experience" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-semibold">Your Review</label>
+                                        <textarea class="form-control" rows="4" placeholder="Share your thoughts about this product..." required></textarea>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                                        <button type="button" class="btn btn-outline-secondary" onclick="toggleReviewForm()">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Reviews List -->
+                            <div class="reviews-list">
+                                <div class="review-card">
+                                    <div class="d-flex gap-3">
+                                        <img src="../images/product/John.jpeg" class="reviewer-avatar" alt="John Doe" onerror="this.src='https://via.placeholder.com/50x50/e2e8f0/64748b?text=User'">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <div class="reviewer-name">John Doe</div>
+                                                    <div class="review-date">Verified Purchase | 2 weeks ago</div>
+                                                </div>
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                </div>
+                                            </div>
+                                            <h6 class="fw-bold mt-2 mb-1">Absolutely incredible machine!</h6>
+                                            <p class="review-text">I've been using this MacBook Pro for video editing and 3D rendering, and it's an absolute beast. The M3 Pro chip handles everything I throw at it without breaking a sweat. The display is gorgeous and the battery life is genuinely impressive - I can work a full day without plugging in.</p>
+                                            <div class="review-images">
+                                                <img src="https://via.placeholder.com/80x80/2563eb/ffffff?text=Photo+1" alt="Review photo" onclick="openImageModal(this.src)" onerror="this.style.display='none'">
+                                                <img src="https://via.placeholder.com/80x80/3b82f6/ffffff?text=Photo+2" alt="Review photo" onclick="openImageModal(this.src)" onerror="this.style.display='none'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="review-card">
+                                    <div class="d-flex gap-3">
+                                        <img src="../images/product/Sarah Miller.jpeg" class="reviewer-avatar" alt="Sarah Miller" onerror="this.src='https://via.placeholder.com/50x50/e2e8f0/64748b?text=User'">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <div class="reviewer-name">Sarah Miller</div>
+                                                    <div class="review-date">Verified Purchase | 1 month ago</div>
+                                                </div>
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star"></i>
+                                                </div>
+                                            </div>
+                                            <h6 class="fw-bold mt-2 mb-1">Great laptop, but pricey</h6>
+                                            <p class="review-text">The performance is outstanding and the build quality is top-notch as expected from Apple. My only complaint is the price - it's quite expensive. However, if you need the power for professional work, it's worth the investment. The Space Black color looks amazing in person.</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="review-card">
+                                    <div class="d-flex gap-3">
+                                        <img src="../images/product/miller.jpeg" class="reviewer-avatar" alt="Ahmed Khalid" onerror="this.src='https://via.placeholder.com/50x50/e2e8f0/64748b?text=User'">
+                                        <div class="flex-grow-1">
+                                            <div class="d-flex justify-content-between align-items-start">
+                                                <div>
+                                                    <div class="reviewer-name">Ahmed Khalid</div>
+                                                    <div class="review-date">Verified Purchase | 3 weeks ago</div>
+                                                </div>
+                                                <div class="stars">
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill"></i>
+                                                    <i class="bi bi-star-fill-half-alt"></i>
+                                                </div>
+                                            </div>
+                                            <h6 class="fw-bold mt-2 mb-1">Perfect for developers</h6>
+                                            <p class="review-text">As a software developer, this machine is a dream. Compiling large projects is incredibly fast, and running multiple VMs simultaneously is no problem. The 18GB RAM handles everything smoothly. Highly recommended for anyone in tech.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pagination -->
+                            <nav class="mt-4">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#"><i class="bi bi-chevron-left"></i></a>
+                                    </li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#"><i class="bi bi-chevron-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RELATED PRODUCTS ===== -->
+    <section class="related-section">
+        <div class="container">
+            <h2 class="section-title">Related Products</h2>
+            <div class="row g-4">
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card">
+                        <div class="card-img-wrapper">
+                            <img src="../images/MacBook Air.jpeg" alt="MacBook Air" onerror="this.src='https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Image'">
+                            <span class="card-badge bg-success text-white">New</span>
+                            <div class="card-actions">
+                                <button onclick="addToWishlist(this)" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
+                                <button onclick="quickView(this)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button onclick="addToCart(this)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-category">Laptops</div>
+                            <h5 class="card-title">MacBook Air 15" M2 Chip 8GB RAM 256GB SSD</h5>
+                            <div class="card-price">
+                                <span class="price-current">$1,199.00</span>
+                                <span class="price-old">$1,299.00</span>
+                            </div>
+                            <div class="card-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(189)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card">
+                        <div class="card-img-wrapper">
+                            <img src="../images/Dell XPS 13.jpeg" alt="Dell XPS" onerror="this.src='https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Image'">
+                            <span class="card-badge bg-danger text-white">-20%</span>
+                            <div class="card-actions">
+                                <button onclick="addToWishlist(this)" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
+                                <button onclick="quickView(this)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button onclick="addToCart(this)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-category">Laptops</div>
+                            <h5 class="card-title">Dell XPS 15 9530 Intel Core i7 16GB RAM 512GB SSD</h5>
+                            <div class="card-price">
+                                <span class="price-current">$1,499.00</span>
+                                <span class="price-old">$1,899.00</span>
+                            </div>
+                            <div class="card-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <span>(124)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card">
+                        <div class="card-img-wrapper">
+                            <img src="../images/Lenovo ThinkPad.jpeg" alt="Lenovo ThinkPad" onerror="this.src='https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Image'">
+                            <div class="card-actions">
+                                <button onclick="addToWishlist(this)" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
+                                <button onclick="quickView(this)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button onclick="addToCart(this)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-category">Laptops</div>
+                            <h5 class="card-title">Lenovo ThinkPad X1 Carbon Gen 11 Intel i7 16GB</h5>
+                            <div class="card-price">
+                                <span class="price-current">$1,649.00</span>
+                            </div>
+                            <div class="card-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-half"></i>
+                                <span>(87)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="product-card">
+                        <div class="card-img-wrapper">
+                            <img src="../Hima.jpg" alt="HP Spectre" onerror="this.src='https://via.placeholder.com/300x300/e2e8f0/64748b?text=No+Image'">
+                            <span class="card-badge bg-warning text-dark">Hot</span>
+                            <div class="card-actions">
+                                <button onclick="addToWishlist(this)" title="Add to Wishlist"><i class="bi bi-heart"></i></button>
+                                <button onclick="quickView(this)" title="Quick View"><i class="bi bi-eye"></i></button>
+                                <button onclick="addToCart(this)" title="Add to Cart"><i class="bi bi-cart-plus"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="card-category">Laptops</div>
+                            <h5 class="card-title">HP Spectre x360 14" 2-in-1 Intel i7 16GB 1TB SSD</h5>
+                            <div class="card-price">
+                                <span class="price-current">$1,399.00</span>
+                                <span class="price-old">$1,599.00</span>
+                            </div>
+                            <div class="card-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>bi bi-star-half"></i>
+                                <span>(156)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEWSLETTER ===== -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-8 text-center newsletter-content">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get the latest deals, new arrivals, and tech news delivered straight to your inbox.</p>
+                    <form class="newsletter-form mx-auto" onsubmit="handleNewsletter(event)">
+                        <input type="email" class="form-control" placeholder="Enter your email address" required id="newsletterEmail">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                    <p class="mt-3 mb-0" style="font-size: 0.85rem; opacity: 0.7;">
+                        <i class="bi bi-shield-fill me-1"></i>We respect your privacy. Unsubscribe anytime.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <a href="index.html" class="footer-brand">Hima<span>Tech</span></a>
+                        <p>Your premier destination for laptops, smartphones, accessories, and all things tech. We bring the latest technology to your doorstep in Syria with quality guaranteed.</p>
+                        <div class="social-links">
+                            <a href="404.html" title="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="404.html" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="404.html" title="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="404.html" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="404.html" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i>Home</a></li>
+                        <li><a href="shop.html"><i class="bi bi-chevron-right"></i>Shop</a></li>
+                        <li><a href="categories.html"><i class="bi bi-chevron-right"></i>Categories</a></li>
+                        <li><a href="blog.html"><i class="bi bi-chevron-right"></i>Blog</a></li>
+                        <li><a href="about.html"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Customer Service</h5>
+                    <ul class="footer-links">
+                        <li><a href="contact.html"><i class="bi bi-chevron-right"></i>Contact Us</a></li>
+                        <li><a href="faq.html"><i class="bi bi-chevron-right"></i>FAQ</a></li>
+                        <li><a href="privacy.html"><i class="bi bi-chevron-right"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="bi bi-chevron-right"></i>Terms of Service</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i>Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h5>Contact Info</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>123 Tech Street, Damascus, Syria</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+963 988 123 456</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@himatech-store.com</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill"></i>
+                            <span>Sat - Thu: 9:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>All rights reserved. Built with <i class="bi bi-heart-fill text-danger"></i> in Syria. HimaTech-Store &copy;2026 </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="payment-methods d-flex justify-content-md-end gap-2">
+                            <img src="../images/تنزيل.png" alt="Visa">
+                            <img src="../images/Mastercard.png" alt="MasterCard">
+                            <img src="../images/paypal.png" alt="PayPal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- ===== IMAGE MODAL ===== -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center p-0">
+                    <img src="" id="modalImage" class="img-fluid" alt="Product Image" style="max-height: 80vh;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ===== IMAGE GALLERY =====
+        function changeImage(thumbnail, imageSrc) {
+            document.querySelectorAll('.thumbnail-item').forEach(item => item.classList.remove('active'));
+            thumbnail.classList.add('active');
+            document.getElementById('mainImage').src = imageSrc;
+        }
+
+        function openImageModal(src) {
+            const modalEl = document.getElementById('imageModal');
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            const modalImg = document.getElementById('modalImage');
+            modalImg.src = src || document.getElementById('mainImage').src;
+            modal.show();
+        }
+
+        // ===== COLOR SELECTION =====
+        function selectColor(element) {
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+            document.getElementById('selectedColor').textContent = 'Selected: ' + element.dataset.color;
+        }
+
+        // ===== STORAGE SELECTION =====
+        function selectStorage(element) {
+            document.querySelectorAll('.storage-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        // ===== QUANTITY =====
+        function updateQuantity(change) {
+            const input = document.getElementById('quantityInput');
+            let value = parseInt(input.value) + change;
+            if (value < 1) value = 1;
+            if (value > 10) value = 10;
+            input.value = value;
+        }
+
+        function validateQuantity() {
+            const input = document.getElementById('quantityInput');
+            let value = parseInt(input.value);
+            if (isNaN(value) || value < 1) value = 1;
+            if (value > 10) value = 10;
+            input.value = value;
+        }
+
+        // ===== WISHLIST =====
+        function toggleWishlist() {
+            const btn = document.getElementById('wishlistBtn');
+            const icon = btn.querySelector('i');
+            btn.classList.toggle('active');
+
+            if (btn.classList.contains('active')) {
+                icon.classList.remove('bi-heart');
+                icon.classList.add('bi-heart-fill');
+                showToast('success', 'Added to Wishlist', 'Product has been added to your wishlist.');
+                updateWishlistCount(1);
+            } else {
+                icon.classList.remove('bi-heart-fill');
+                icon.classList.add('bi-heart');
+                showToast('info', 'Removed from Wishlist', 'Product has been removed from your wishlist.');
+                updateWishlistCount(-1);
+            }
+        }
+
+        function addToWishlist(btn) {
+            const icon = btn.querySelector('i');
+            if (icon.classList.contains('far')) {
+                icon.classList.remove('bi-heart');
+                icon.classList.add('bi-heart-fill');
+                btn.style.color = 'var(--danger-color)';
+                showToast('success', 'Added to Wishlist', 'Product has been added to your wishlist.');
+                updateWishlistCount(1);
+            } else {
+                icon.classList.remove('bi-heart-fill');
+                icon.classList.add('bi-heart');
+                btn.style.color = '';
+                showToast('info', 'Removed from Wishlist', 'Product has been removed from your wishlist.');
+                updateWishlistCount(-1);
+            }
+        }
+
+        function updateWishlistCount(change) {
+            const badge = document.getElementById('wishlistCount');
+            let count = parseInt(badge.textContent) + change;
+            if (count < 0) count = 0;
+            badge.textContent = count;
+        }
+
+        // ===== CART =====
+        function addToCart(btn) {
+            showToast('success', 'Added to Cart', 'Product has been added to your cart successfully.');
+            const badge = document.getElementById('cartCount');
+            badge.textContent = parseInt(badge.textContent) + 1;
+        }
+
+        // ===== COMPARE =====
+        function addToCompare() {
+            showToast('info', 'Added to Compare', 'Product has been added to compare list.');
+        }
+
+        // ===== QUICK VIEW =====
+        function quickView(btn) {
+            showToast('info', 'Quick View', 'Quick view modal would open here.');
+        }
+
+        // ===== REVIEWS =====
+        function toggleReviewForm() {
+            const form = document.getElementById('reviewForm');
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
+
+        let currentRating = 0;
+        function setRating(rating) {
+            currentRating = rating;
+            document.getElementById('ratingValue').value = rating;
+            const stars = document.querySelectorAll('#starRatingInput i');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('far', 'fa-star');
+                    star.classList.add('fas', 'fa-star', 'active');
+                } else {
+                    star.classList.remove('fas', 'fa-star', 'active');
+                    star.classList.add('far', 'fa-star');
+                }
+            });
+        }
+
+        function submitReview(event) {
+            event.preventDefault();
+            if (currentRating === 0) {
+                showToast('error', 'Error', 'Please select a rating before submitting.');
+                return;
+            }
+            showToast('success', 'Review Submitted', 'Thank you! Your review has been submitted for approval.');
+            toggleReviewForm();
+            document.getElementById('ratingValue').value = '0';
+            currentRating = 0;
+            document.querySelectorAll('#starRatingInput i').forEach(star => {
+                star.classList.remove('fas', 'fa-star', 'active');
+                star.classList.add('far', 'fa-star');
+            });
+            event.target.reset();
+        }
+
+        // ===== TOAST NOTIFICATIONS =====
+        function showToast(type, title, message) {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toastId = 'toast-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+
+            const icons = {
+                success: 'bi bi-check-circle',
+                error: 'bi bi-x-circle',
+                warning: 'bi bi-exclamation-triangle',
+                info: 'bi bi-info-circle'
+            };
+
+            const toast = document.createElement('div');
+            toast.className = 'custom-toast toast-' + type;
+            toast.id = toastId;
+
+            toast.innerHTML = '<div class="toast-icon"><i class="' + icons[type] + '"></i></div>' +
+                '<div class="flex-grow-1"><strong>' + title + '</strong><br><span style="font-size:0.85rem;color:#64748b;">' + message + '</span></div>' +
+                '<button type="button" class="btn-close" style="font-size:0.7rem;" onclick="closeToast(&quot;' + toastId + '&quot;)"></button>';
+
+            container.appendChild(toast);
+
+            setTimeout(function() {
+                closeToast(toastId);
+            }, 4000);
+        }
+
+        function closeToast(id) {
+            const toast = document.getElementById(id);
+            if (toast) {
+                toast.style.animation = 'slideIn 0.3s ease reverse';
+                setTimeout(function() {
+                    if (toast.parentNode) {
+                        toast.remove();
+                    }
+                }, 300);
+            }
+        }
+
+        // ===== SCROLL TO TOP =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== SEARCH FUNCTIONALITY =====
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showToast('info', 'Searching...', 'Searching for: ' + query);
+                setTimeout(() => {
+                    window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+                }, 500);
+            } else {
+                showToast('error', 'Error', 'Please enter a search term');
+            }
+        }
+
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // ===== NEWSLETTER =====
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            showToast('success', 'Subscribed!', 'Thank you for subscribing! Check your email.');
+            document.getElementById('newsletterEmail').value = '';
+        }
+
+        // ===== MAIN IMAGE ZOOM EFFECT =====
+        const mainImageContainer = document.getElementById('mainImageContainer');
+        if (mainImageContainer) {
+            mainImageContainer.addEventListener('mousemove', function(e) {
+                const img = this.querySelector('img');
+                const rect = this.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width;
+                const y = (e.clientY - rect.top) / rect.height;
+                img.style.transformOrigin = `${x * 100}% ${y * 100}%`;
+                img.style.transform = 'scale(1.5)';
+            });
+
+            mainImageContainer.addEventListener('mouseleave', function() {
+                const img = this.querySelector('img');
+                img.style.transform = 'scale(1)';
+                setTimeout(() => { img.style.transformOrigin = 'center center'; }, 300);
+            });
+        }
+
+        // ===== ANIMATE ON SCROLL =====
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.product-card, .feature-box');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 50) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initialize animations
+        document.querySelectorAll('.product-card, .feature-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>

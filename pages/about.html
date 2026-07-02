@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <meta name="description" content="Learn about HimaTech-Store - Your trusted tech e-commerce store in Damascus, Syria">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom SCSS (compiled via Webpack) -->
+    <link rel="stylesheet" href="dist/css/main.css">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f97316;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .top-bar {
+            background-color: var(--dark-color);
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+
+        .top-bar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover { color: #fff; }
+
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-brand span { color: var(--secondary-color); }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .header-icons .btn {
+            color: var(--dark-color);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .header-icons .btn:hover { color: var(--primary-color); }
+
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 45px;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-section {
+            background-color: #f8fafc;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-section .breadcrumb {
+            margin-bottom: 0;
+        }
+
+        .breadcrumb-section .breadcrumb-item a {
+            color: var(--gray-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-section .breadcrumb-item a:hover { color: var(--primary-color); }
+
+        .breadcrumb-section .breadcrumb-item.active {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+
+        /* ===== ABOUT PAGE ===== */
+        .about-section { padding: 60px 0; }
+
+        .about-hero-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            padding: 60px;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .about-hero-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-hero-card h2 {
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-hero-card p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        .btn-light-custom {
+            background: #fff;
+            color: var(--primary-color);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-light-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: var(--primary-dark);
+        }
+
+        .btn-outline-light-custom {
+            border: 2px solid rgba(255,255,255,0.3);
+            color: #fff;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 1;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline-light-custom:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            color: #fff;
+        }
+
+        .about-hero-img {
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .stat-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .stat-card .stat-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 16px;
+        }
+
+        .stat-card .stat-number {
+            font-weight: 800;
+            font-size: 2.25rem;
+            color: var(--dark-color);
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.9375rem;
+            color: var(--gray-color);
+            font-weight: 500;
+        }
+
+        .section-heading {
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .section-subheading {
+            font-size: 1rem;
+            color: var(--gray-color);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .story-text {
+            font-size: 0.9375rem;
+            color: var(--gray-color);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .story-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .story-feature .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .story-feature div {
+            font-size: 0.9375rem;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 28px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 28px;
+        }
+
+        .timeline-item:last-child { padding-bottom: 0; }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        .timeline-year {
+            font-weight: 700;
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-color);
+            margin-bottom: 4px;
+        }
+
+        .timeline-desc {
+            font-size: 0.875rem;
+            color: var(--gray-color);
+            line-height: 1.6;
+        }
+
+        .value-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s;
+            height: 100%;
+        }
+
+        .value-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .value-card .value-icon {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin-bottom: 20px;
+        }
+
+        .value-card .value-icon.primary { background: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
+        .value-card .value-icon.success { background: rgba(34, 197, 94, 0.1); color: var(--success-color); }
+        .value-card .value-icon.info { background: rgba(6, 182, 212, 0.1); color: #06b6d4; }
+        .value-card .value-icon.warning { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+
+        .value-card h5 {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .value-card p {
+            font-size: 0.875rem;
+            color: var(--gray-color);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .team-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s;
+            text-align: center;
+            height: 100%;
+        }
+
+        .team-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .team-card-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(37, 99, 235, 0.2);
+            margin: 32px auto 16px;
+            transition: all 0.3s;
+        }
+
+        .team-card:hover .team-card-img {
+            border-color: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .team-card-body { padding: 0 24px 28px; }
+
+        .team-card-body h5 {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--dark-color);
+            margin-bottom: 4px;
+        }
+
+        .team-card-body .role {
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-card-body p {
+            font-size: 0.875rem;
+            color: var(--gray-color);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .team-social a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: var(--gray-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .team-social a:hover {
+            background: var(--primary-color);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 16px;
+            padding: 60px 40px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-section h3 {
+            font-weight: 800;
+            font-size: 1.875rem;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.0625rem;
+            opacity: 0.9;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--dark-color);
+            color: #cbd5e1;
+            padding-top: 70px;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand span { color: var(--secondary-color); }
+
+        .footer-about p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover { color: var(--primary-color); }
+
+        .footer-links a i { font-size: 0.8rem; }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .payment-methods img:hover { opacity: 1; }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .custom-toast {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .toast-success .toast-icon { background-color: rgba(34, 197, 94, 0.1); color: var(--success-color); }
+        .toast-error .toast-icon { background-color: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .toast-info .toast-icon { background-color: rgba(37, 99, 235, 0.1); color: var(--primary-color); }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .about-hero-card { padding: 40px 28px; }
+            .about-hero-card h2 { font-size: 2rem; }
+        }
+
+        @media (max-width: 767.98px) {
+            .section-heading { font-size: 1.7rem; }
+            .about-hero-card { padding: 32px 20px; }
+            .about-hero-card h2 { font-size: 1.625rem; }
+            .cta-section { padding: 40px 24px; }
+            .stat-card { padding: 24px 16px; }
+        }
+    </style>
+
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span><i class="bi bi-telephone-fill me-2"></i>+963 988 123 456</span>
+                    <span class="ms-4"><i class="bi bi-envelope-fill me-2"></i>info@himatech-store.com</span>
+                </div>
+                <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                    <a href="#" class="me-3"><i class="bi bi-geo-alt-fill me-1"></i>Damascus, Syria</a>
+                    <a href="404.html" class="me-3">Track Order</a>
+                    <a href="login.html">Login</a>
+                    <span class="mx-2">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN HEADER ===== -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Hima<span>Tech</span></a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-3 header-icons">
+                        <div class="search-box d-none d-lg-block">
+                            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                            <button type="button" onclick="handleSearch()"><i class="bi bi-search"></i></button>
+                        </div>
+
+                        <a href="wishlist.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-heart fs-5"></i>
+                            <span class="badge-count" id="wishlistCount">3</span>
+                        </a>
+
+                        <a href="cart.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span class="badge-count" id="cartCount">2</span>
+                        </a>
+
+                        <a href="user-profile.html" class="btn btn-link text-decoration-none">
+                            <i class="bi bi-person fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house-door me-1"></i>Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">About Us</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT SECTION ===== -->
+    <section class="about-section">
+        <div class="container">
+            <!-- Hero -->
+            <div class="about-hero-card fade-in-up">
+                <div class="row align-items-center">
+                    <div class="col-lg-7">
+                        <h2>We Bring Technology Closer to You</h2>
+                        <p>HimaTech-Store is your premier destination for cutting-edge technology products in Damascus, Syria. We believe everyone deserves access to the latest tech innovations.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="shop.html" class="btn-light-custom">Start Shopping <i class="bi bi-arrow-right"></i></a>
+                            <a href="contact.html" class="btn-outline-light-custom">Contact Us <i class="bi bi-envelope"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 mt-4 mt-lg-0">
+                        <img src="../images/Hima.jpg" alt="About HimaTech" class="about-hero-img" onerror="this.src='https://via.placeholder.com/500x320?text=About+Us'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="row g-4 mb-5">
+                <div class="col-6 col-lg-3 fade-in-up delay-1">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-box-seam"></i></div>
+                        <div class="stat-number counter" data-target="5000">0</div>
+                        <div class="stat-label">Products Sold</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 fade-in-up delay-2">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-people"></i></div>
+                        <div class="stat-number counter" data-target="2500">0</div>
+                        <div class="stat-label">Happy Customers</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 fade-in-up delay-3">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-star"></i></div>
+                        <div class="stat-number counter" data-target="98">0</div>
+                        <div class="stat-label">% Satisfaction</div>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-3 fade-in-up delay-4">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="bi bi-award"></i></div>
+                        <div class="stat-number counter" data-target="5">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Story & Timeline -->
+            <div class="row g-5 mb-5">
+                <div class="col-lg-6 fade-in-up">
+                    <h3 class="section-heading" style="text-align: left;">Our Story</h3>
+                    <p class="section-subheading" style="text-align: left;">From a small shop to a leading tech retailer</p>
+                    <p class="story-text">Founded in 2021 in the heart of Damascus, HimaTech-Store started with a simple mission: to make technology accessible to everyone in Syria. What began as a small shop has grown into one of the most trusted tech e-commerce platforms in the region.</p>
+                    <p class="story-text">We carefully curate our product selection to ensure we only offer genuine, high-quality tech products from reputable brands. From smartphones and laptops to smart home devices and accessories, we have everything tech enthusiasts need.</p>
+                    <p class="story-text">Our team of tech experts is always ready to help you find the perfect product for your needs and budget.</p>
+
+                    <div class="mt-4">
+                        <div class="story-feature">
+                            <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+                            <div>Genuine Products Guaranteed</div>
+                        </div>
+                        <div class="story-feature">
+                            <div class="feature-icon"><i class="bi bi-truck"></i></div>
+                            <div>Fast Delivery Across Syria</div>
+                        </div>
+                        <div class="story-feature">
+                            <div class="feature-icon"><i class="bi bi-headset"></i></div>
+                            <div>24/7 Customer Support</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 fade-in-up delay-1">
+                    <h3 class="section-heading" style="text-align: left;">Our Journey</h3>
+                    <p class="section-subheading" style="text-align: left;">Milestones that shaped who we are</p>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-year">2021</div>
+                            <div class="timeline-title">Founded in Damascus</div>
+                            <div class="timeline-desc">Started as a small local tech shop with a vision to bring quality technology to Syria.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2022</div>
+                            <div class="timeline-title">Launched Online Store</div>
+                            <div class="timeline-desc">Expanded our reach by launching our e-commerce platform to serve customers nationwide.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2023</div>
+                            <div class="timeline-title">Reached 1000+ Customers</div>
+                            <div class="timeline-desc">Celebrated serving over 1000 happy customers with a growing product catalog.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2024</div>
+                            <div class="timeline-title">Expanded Product Range</div>
+                            <div class="timeline-desc">Added smart home devices, gaming accessories, and professional tech solutions.</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-year">2025</div>
+                            <div class="timeline-title">Leading Tech Retailer</div>
+                            <div class="timeline-desc">Became one of the most trusted names in tech retail in Syria.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Values -->
+            <div class="text-center mb-4 fade-in-up">
+                <h3 class="section-heading">Our Core Values</h3>
+                <p class="section-subheading">The principles that guide everything we do</p>
+            </div>
+            <div class="row g-4 mb-5">
+                <div class="col-md-6 col-lg-3 fade-in-up delay-1">
+                    <div class="value-card">
+                        <div class="value-icon primary"><i class="bi bi-heart"></i></div>
+                        <h5>Customer First</h5>
+                        <p>Your satisfaction is our top priority. We go above and beyond to ensure you have the best shopping experience.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in-up delay-2">
+                    <div class="value-card">
+                        <div class="value-icon success"><i class="bi bi-shield-check"></i></div>
+                        <h5>Quality Assurance</h5>
+                        <p>Every product is carefully verified for authenticity and quality before reaching your hands.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in-up delay-3">
+                    <div class="value-card">
+                        <div class="value-icon info"><i class="bi bi-lightning-charge"></i></div>
+                        <h5>Innovation</h5>
+                        <p>We stay ahead of tech trends to bring you the latest and most innovative products on the market.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in-up delay-4">
+                    <div class="value-card">
+                        <div class="value-icon warning"><i class="bi bi-hand-thumbs-up"></i></div>
+                        <h5>Integrity</h5>
+                        <p>Honest pricing, transparent policies, and ethical business practices are the foundation of our success.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team -->
+            <div class="text-center mb-4 fade-in-up">
+                <h3 class="section-heading">Meet Our Team</h3>
+                <p class="section-subheading">The passionate people behind HimaTech-Store</p>
+            </div>
+            <div class="row g-4 mb-5 justify-content-center">
+                <div class="col-md-6 col-lg-3 fade-in-up delay-1">
+                    <div class="team-card">
+                        <img src="../images/wishlist/ahmad.jpeg" alt="Ahmad Hima" class="team-card-img" onerror="this.src='https://via.placeholder.com/120x120?text=Team'">
+                        <div class="team-card-body">
+                            <h5>Ahmad Hima</h5>
+                            <div class="role">Founder & CEO</div>
+                            <p>Tech enthusiast with 10+ years of experience in electronics retail.</p>
+                            <div class="team-social">
+                                <a href="404.html"><i class="bi bi-linkedin"></i></a>
+                                <a href="404.html"><i class="bi bi-twitter-x"></i></a>
+                                <a href="404.html"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in-up delay-2">
+                    <div class="team-card">
+                        <img src="../images/Omar.jpeg" alt="Omar Khaled" class="team-card-img" onerror="this.src='https://via.placeholder.com/120x120?text=Team'">
+                        <div class="team-card-body">
+                            <h5>Omar Khaled</h5>
+                            <div class="role">Tech Lead</div>
+                            <p>Expert in emerging technologies and product curation.</p>
+                            <div class="team-social">
+                                <a href="404.html"><i class="bi bi-linkedin"></i></a>
+                                <a href="404.html"><i class="bi bi-twitter-x"></i></a>
+                                <a href="404.html"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in-up delay-3">
+                    <div class="team-card">
+                        <img src="../images/Sara.jpeg" alt="Sara Mohamad" class="team-card-img" onerror="this.src='https://via.placeholder.com/120x120?text=Team'">
+                        <div class="team-card-body">
+                            <h5>Sara Mohamad</h5>
+                            <div class="role">Marketing Manager</div>
+                            <p>Creative strategist driving our brand growth and customer engagement.</p>
+                            <div class="team-social">
+                                <a href="404.html"><i class="bi bi-linkedin"></i></a>
+                                <a href="404.html"><i class="bi bi-twitter-x"></i></a>
+                                <a href="404.html"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 fade-in-up delay-4">
+                    <div class="team-card">
+                        <img src="../images/Layla.jpeg" alt="Layla Hassan" class="team-card-img" onerror="this.src='https://via.placeholder.com/120x120?text=Team'">
+                        <div class="team-card-body">
+                            <h5>Layla Hassan</h5>
+                            <div class="role">Customer Support Lead</div>
+                            <p>Dedicated to providing exceptional support and solving customer issues.</p>
+                            <div class="team-social">
+                                <a href="404.html"><i class="bi bi-linkedin"></i></a>
+                                <a href="404.html"><i class="bi bi-twitter-x"></i></a>
+                                <a href="404.html"><i class="bi bi-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <div class="cta-section fade-in-up">
+                <h3>Ready to Experience the Best in Tech?</h3>
+                <p>Join thousands of satisfied customers who trust HimaTech-Store for their technology needs.</p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="shop.html" class="btn-light-custom">Shop Now <i class="bi bi-shop"></i></a>
+                    <a href="contact.html" class="btn-outline-light-custom">Get in Touch <i class="bi bi-chat-dots"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <a href="index.html" class="footer-brand">Hima<span>Tech</span></a>
+                        <p>Your premier destination for laptops, smartphones, accessories, and all things tech. We bring the latest technology to your doorstep in Syria with quality guaranteed.</p>
+                        <div class="social-links">
+                            <a href="404.html" title="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="404.html" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="404.html" title="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="404.html" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="404.html" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i>Home</a></li>
+                        <li><a href="shop.html"><i class="bi bi-chevron-right"></i>Shop</a></li>
+                        <li><a href="categories.html"><i class="bi bi-chevron-right"></i>Categories</a></li>
+                        <li><a href="blog.html"><i class="bi bi-chevron-right"></i>Blog</a></li>
+                        <li><a href="about.html"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Customer Service</h5>
+                    <ul class="footer-links">
+                        <li><a href="contact.html"><i class="bi bi-chevron-right"></i>Contact Us</a></li>
+                        <li><a href="faq.html"><i class="bi bi-chevron-right"></i>FAQ</a></li>
+                        <li><a href="privacy.html"><i class="bi bi-chevron-right"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="bi bi-chevron-right"></i>Terms of Service</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i>Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h5>Contact Info</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>123 Tech Street, Damascus, Syria</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+963 988 123 456</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@himatech-store.com</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill"></i>
+                            <span>Sat - Thu: 9:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>All rights reserved. Built with <i class="bi bi-heart-fill text-danger"></i> in Syria. HimaTech-Store &copy;2026 </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="payment-methods d-flex justify-content-md-end gap-2">
+                            <img src="../images/تنزيل.png" alt="Visa">
+                            <img src="../images/MasterCard.png" alt="MasterCard">
+                            <img src="../images/PayPal.png" alt="PayPal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // ===== SCROLL TO TOP =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== SEARCH FUNCTIONALITY =====
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showToast('Searching for: ' + query, 'info');
+                setTimeout(() => {
+                    window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+                }, 500);
+            } else {
+                showToast('Please enter a search term', 'error');
+            }
+        }
+
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // ===== TOAST NOTIFICATIONS =====
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let icon = 'bi-info-circle';
+            if (type === 'success') icon = 'bi-check-circle';
+            if (type === 'error') icon = 'bi-x-circle';
+
+            toast.className = `custom-toast toast-${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon"><i class="bi ${icon}"></i></div>
+                <div class="toast-message">${message}</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ===== ANIMATED COUNTERS =====
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.target);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(function() {
+                current += step;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                element.textContent = Math.floor(current).toLocaleString();
+            }, 16);
+        }
+
+        const counterObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    if (!counter.classList.contains('counted')) {
+                        counter.classList.add('counted');
+                        animateCounter(counter);
+                    }
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(function(counter) {
+            counterObserver.observe(counter);
+        });
+
+        // ===== ANIMATE ON SCROLL =====
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // ===== MOBILE MENU CLOSE ON CLICK =====
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbar = document.getElementById('mainNavbar');
+                const bsCollapse = bootstrap.Collapse.getInstance(navbar);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+        });
+    </script>
+</body>
+</html>

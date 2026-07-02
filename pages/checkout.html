@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <meta name="description" content="Complete your purchase at HimaTech-Store. Secure checkout with fast delivery across Syria.">
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom SCSS (compiled via Webpack) -->
+    <link rel="stylesheet" href="dist/css/main.css">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #f97316;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --gray-color: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #22c55e;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .top-bar {
+            background-color: var(--dark-color);
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+
+        .top-bar a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .top-bar a:hover {
+            color: #fff;
+        }
+
+        .main-header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: var(--primary-color) !important;
+        }
+
+        .navbar-brand span {
+            color: var(--secondary-color);
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-color) !important;
+            padding: 0.5rem 1rem !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color) !important;
+        }
+
+        .header-icons .btn {
+            color: var(--dark-color);
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .header-icons .btn:hover {
+            color: var(--primary-color);
+        }
+
+        .badge-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-size: 0.65rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            border-radius: 50px;
+            padding-left: 20px;
+            padding-right: 45px;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary-color);
+            box-shadow: none;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: var(--primary-color);
+            color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb-section {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #334155 100%);
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .breadcrumb-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .breadcrumb-title {
+            color: #fff;
+            font-weight: 800;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb {
+            background: none;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+        .breadcrumb-item a { color: #cbd5e1; text-decoration: none; transition: color 0.3s; }
+        .breadcrumb-item a:hover { color: #fff; }
+        .breadcrumb-item.active { color: var(--secondary-color); font-weight: 500; }
+        .breadcrumb-item + .breadcrumb-item::before { color: #64748b; }
+
+        /* ===== CHECKOUT PAGE ===== */
+        .checkout-section { padding: 60px 0; }
+
+        .checkout-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+        .checkout-card-header {
+            padding: 24px 28px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .checkout-card-header .step-number {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: #fff;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        .checkout-card-header .step-number.completed {
+            background: var(--success-color);
+        }
+        .checkout-card-header h5 {
+            font-weight: 700;
+            font-size: 1.125rem;
+            margin: 0;
+            color: var(--dark-color);
+        }
+        .checkout-card-body { padding: 28px; }
+
+        .form-label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--dark-color);
+            margin-bottom: 6px;
+        }
+        .form-control, .form-select {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            font-size: 0.9375rem;
+            transition: all 0.3s;
+            background: var(--light-color);
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        .form-control.is-invalid { border-color: var(--danger-color); }
+        .form-control.is-invalid:focus { box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1); }
+        .invalid-feedback { font-size: 0.8125rem; }
+
+        .payment-method {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .payment-method:hover { border-color: rgba(37, 99, 235, 0.3); }
+        .payment-method.active {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+        }
+        .payment-method input { display: none; }
+        .payment-method .method-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--light-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--gray-color);
+            transition: all 0.3s;
+        }
+        .payment-method.active .method-icon {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .payment-method .method-info { flex: 1; }
+        .payment-method .method-info h6 {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--dark-color);
+            margin: 0;
+        }
+        .payment-method .method-info p {
+            font-size: 0.8125rem;
+            color: var(--gray-color);
+            margin: 2px 0 0;
+        }
+        .payment-method .method-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .payment-method.active .method-check {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .payment-method .method-check i { font-size: 0.75rem; opacity: 0; }
+        .payment-method.active .method-check i { opacity: 1; }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--light-color);
+        }
+        .order-item:last-child { border-bottom: none; }
+        .order-item-img {
+            width: 64px;
+            height: 64px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            background: var(--light-color);
+            flex-shrink: 0;
+        }
+        .order-item-info { flex: 1; }
+        .order-item-info h6 {
+            font-weight: 600;
+            font-size: 0.9375rem;
+            color: var(--dark-color);
+            margin: 0 0 2px;
+        }
+        .order-item-info .variant {
+            font-size: 0.8125rem;
+            color: var(--gray-color);
+        }
+        .order-item-info .qty {
+            font-size: 0.75rem;
+            color: var(--gray-color);
+            margin-top: 2px;
+        }
+        .order-item-price {
+            font-weight: 700;
+            font-size: 0.9375rem;
+            color: var(--dark-color);
+            white-space: nowrap;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            font-size: 0.9375rem;
+        }
+        .summary-row .label { color: var(--gray-color); }
+        .summary-row .value { font-weight: 600; color: var(--dark-color); }
+        .summary-row.discount .value { color: var(--success-color); }
+        .summary-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: 12px 0;
+        }
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0 8px;
+        }
+        .summary-total .label {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--dark-color);
+        }
+        .summary-total .value {
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .btn-place-order {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: #fff;
+            border: none;
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        .btn-place-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.3);
+            color: #fff;
+        }
+        .btn-place-order:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.8125rem;
+            color: var(--gray-color);
+            margin-top: 16px;
+        }
+        .secure-badge i { color: var(--success-color); font-size: 1rem; }
+
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .progress-step .step-dot {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--border-color);
+            color: var(--gray-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+            transition: all 0.3s;
+        }
+        .progress-step.active .step-dot {
+            background: var(--primary-color);
+            color: #fff;
+        }
+        .progress-step.completed .step-dot {
+            background: var(--success-color);
+            color: #fff;
+        }
+        .progress-step .step-label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--gray-color);
+        }
+        .progress-step.active .step-label { color: var(--primary-color); font-weight: 600; }
+        .progress-step.completed .step-label { color: var(--success-color); }
+        .step-line {
+            width: 60px;
+            height: 2px;
+            background: var(--border-color);
+            border-radius: 2px;
+        }
+        .step-line.completed { background: var(--success-color); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background-color: var(--dark-color);
+            color: #cbd5e1;
+            padding-top: 70px;
+        }
+
+        .footer-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand span {
+            color: var(--secondary-color);
+        }
+
+        .footer-about p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer h5 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-links a i {
+            font-size: 0.8rem;
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .footer-contact i {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 25px 0;
+            margin-top: 50px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .payment-methods img:hover {
+            opacity: 1;
+        }
+
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background-color: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+
+        .custom-toast {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .toast-success .toast-icon {
+            background-color: rgba(34, 197, 94, 0.1);
+            color: var(--success-color);
+        }
+
+        .toast-error .toast-icon {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--danger-color);
+        }
+
+        .toast-info .toast-icon {
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+
+        /* ===== ORDER SUCCESS MODAL ===== */
+        .modal-content {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 24px;
+        }
+        .modal-header .modal-title {
+            font-weight: 700;
+            font-size: 1.125rem;
+        }
+        .modal-body {
+            padding: 24px;
+            font-size: 0.9375rem;
+            color: var(--gray-color);
+        }
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+            padding: 16px 24px;
+        }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(34, 197, 94, 0.1);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .success-icon i { font-size: 2.5rem; color: var(--success-color); }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 991px) {
+            .breadcrumb-title { font-size: 2rem; }
+            .progress-steps { flex-wrap: wrap; }
+            .step-line { width: 30px; }
+        }
+
+        @media (max-width: 767px) {
+            .breadcrumb-title { font-size: 1.75rem; }
+            .checkout-card-body { padding: 20px; }
+            .progress-step .step-label { display: none; }
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <span><i class="bi bi-telephone-fill me-2"></i>+963 988 123 456</span>
+                    <span class="ms-4"><i class="bi bi-envelope-fill me-2"></i>info@himatech-store.com</span>
+                </div>
+                <div class="col-md-6 text-md-end mt-2 mt-md-0">
+                    <a href="#" class="me-3"><i class="bi bi-geo-alt-fill me-1"></i>Damascus, Syria</a>
+                    <a href="404.html" class="me-3">Track Order</a>
+                    <a href="login.html">Login</a>
+                    <span class="mx-2">|</span>
+                    <a href="register.html">Register</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MAIN HEADER ===== -->
+    <header class="main-header">
+        <nav class="navbar navbar-expand-lg py-3">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Hima<span>Tech</span></a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="mainNavbar">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="categories.html">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="blog.html">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="about.html">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-3 header-icons">
+                        <div class="search-box d-none d-lg-block">
+                            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
+                            <button type="button" onclick="handleSearch()"><i class="bi bi-search"></i></button>
+                        </div>
+
+                        <a href="wishlist.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-heart fs-5"></i>
+                            <span class="badge-count" id="wishlistCount">3</span>
+                        </a>
+
+                        <a href="cart.html" class="btn btn-link position-relative text-decoration-none">
+                            <i class="bi bi-cart3 fs-5"></i>
+                            <span class="badge-count" id="cartCount">2</span>
+                        </a>
+
+                        <a href="user-profile.html" class="btn btn-link text-decoration-none">
+                            <i class="bi bi-person fs-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ===== BREADCRUMB ===== -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="breadcrumb-title">Checkout</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="cart.html">Cart</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CHECKOUT SECTION ===== -->
+    <section class="checkout-section">
+        <div class="container">
+            <!-- Progress Steps -->
+            <div class="progress-steps fade-in-up">
+                <div class="progress-step completed">
+                    <span class="step-dot"><i class="bi bi-check-lg"></i></span>
+                    <span class="step-label">Cart</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="progress-step active">
+                    <span class="step-dot">2</span>
+                    <span class="step-label">Checkout</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="progress-step">
+                    <span class="step-dot">3</span>
+                    <span class="step-label">Complete</span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Shipping Information -->
+                    <div class="checkout-card fade-in-up">
+                        <div class="checkout-card-header">
+                            <span class="step-number">1</span>
+                            <h5>Shipping Information</h5>
+                        </div>
+                        <div class="checkout-card-body">
+                            <form id="shippingForm">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="form-label">First Name *</label>
+                                        <input type="text" class="form-control" id="firstName" placeholder="John" required>
+                                        <div class="invalid-feedback">Please enter your first name</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Last Name *</label>
+                                        <input type="text" class="form-control" id="lastName" placeholder="Doe" required>
+                                        <div class="invalid-feedback">Please enter your last name</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" id="email" placeholder="john@example.com" required>
+                                        <div class="invalid-feedback">Please enter a valid email</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" id="phone" placeholder="+963 xxx xxx xxx" required>
+                                        <div class="invalid-feedback">Please enter your phone number</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Street Address *</label>
+                                        <input type="text" class="form-control" id="address" placeholder="123 Main Street, Building 5" required>
+                                        <div class="invalid-feedback">Please enter your address</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">City *</label>
+                                        <input type="text" class="form-control" id="city" placeholder="Damascus" required>
+                                        <div class="invalid-feedback">Please enter your city</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Governorate *</label>
+                                        <select class="form-select" id="governorate" required>
+                                            <option value="" selected disabled>Select governorate</option>
+                                            <option value="damascus">Damascus</option>
+                                            <option value="aleppo">Aleppo</option>
+                                            <option value="homs">Homs</option>
+                                            <option value="latakia">Latakia</option>
+                                            <option value="tartus">Tartus</option>
+                                            <option value="hama">Hama</option>
+                                            <option value="daraa">Daraa</option>
+                                            <option value="raqqa">Raqqa</option>
+                                            <option value="deir-ez-zor">Deir ez-Zor</option>
+                                            <option value="idleb">Idlib</option>
+                                            <option value="hasakah">Al-Hasakah</option>
+                                            <option value="suwayda">As-Suwayda</option>
+                                            <option value="quneitra">Quneitra</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select a governorate</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Order Notes (Optional)</label>
+                                        <textarea class="form-control" id="notes" rows="3" placeholder="Special instructions for delivery..."></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="checkout-card fade-in-up delay-1">
+                        <div class="checkout-card-header">
+                            <span class="step-number">2</span>
+                            <h5>Payment Method</h5>
+                        </div>
+                        <div class="checkout-card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="payment-method active" onclick="selectPayment(this, 'cod')">
+                                        <input type="radio" name="payment" value="cod" checked>
+                                        <span class="method-icon"><i class="bi bi-cash-stack"></i></span>
+                                        <div class="method-info">
+                                            <h6>Cash on Delivery</h6>
+                                            <p>Pay when you receive</p>
+                                        </div>
+                                        <span class="method-check"><i class="bi bi-check-lg"></i></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="payment-method" onclick="selectPayment(this, 'card')">
+                                        <input type="radio" name="payment" value="card">
+                                        <span class="method-icon"><i class="bi bi-credit-card-2-front"></i></span>
+                                        <div class="method-info">
+                                            <h6>Credit Card</h6>
+                                            <p>Visa, Mastercard, Amex</p>
+                                        </div>
+                                        <span class="method-check"><i class="bi bi-check-lg"></i></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="payment-method" onclick="selectPayment(this, 'paypal')">
+                                        <input type="radio" name="payment" value="paypal">
+                                        <span class="method-icon"><i class="bi bi-paypal"></i></span>
+                                        <div class="method-info">
+                                            <h6>PayPal</h6>
+                                            <p>Fast & secure payment</p>
+                                        </div>
+                                        <span class="method-check"><i class="bi bi-check-lg"></i></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="payment-method" onclick="selectPayment(this, 'wallet')">
+                                        <input type="radio" name="payment" value="wallet">
+                                        <span class="method-icon"><i class="bi bi-wallet2"></i></span>
+                                        <div class="method-info">
+                                            <h6>Digital Wallet</h6>
+                                            <p>Apple Pay, Google Pay</p>
+                                        </div>
+                                        <span class="method-check"><i class="bi bi-check-lg"></i></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Credit Card Form (Hidden by default) -->
+                            <div id="cardForm" class="mt-4" style="display: none;">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label">Card Number *</label>
+                                        <input type="text" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Expiry Date *</label>
+                                        <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">CVV *</label>
+                                        <input type="text" class="form-control" id="cvv" placeholder="123" maxlength="4">
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label">Cardholder Name *</label>
+                                        <input type="text" class="form-control" id="cardName" placeholder="Name on card">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <!-- Order Summary -->
+                    <div class="checkout-card fade-in-up delay-2" style="position: sticky; top: 100px;">
+                        <div class="checkout-card-header">
+                            <h5><i class="bi bi-receipt me-2 text-primary"></i>Order Summary</h5>
+                        </div>
+                        <div class="checkout-card-body" style="padding-bottom: 0;">
+                            <!-- Order Items -->
+                            <div id="orderItems">
+                                <div class="order-item">
+                                    <img src="../images/MacBook-Pro.jpeg" alt="MacBook Pro" class="order-item-img" onerror="this.src='https://via.placeholder.com/64x64/e2e8f0/64748b?text=No+Image'">
+                                    <div class="order-item-info">
+                                        <h6>MacBook Pro 14" M3</h6>
+                                        <div class="variant">Space Gray / 512GB</div>
+                                        <div class="qty">Qty: 1</div>
+                                    </div>
+                                    <span class="order-item-price">$1,299.00</span>
+                                </div>
+                                <div class="order-item">
+                                    <img src="../images/iPhone-15-Pro.jpeg" alt="iPhone" class="order-item-img" onerror="this.src='https://via.placeholder.com/64x64/e2e8f0/64748b?text=No+Image'">
+                                    <div class="order-item-info">
+                                        <h6>iPhone 15 Pro Max</h6>
+                                        <div class="variant">Natural Titanium / 256GB</div>
+                                        <div class="qty">Qty: 1</div>
+                                    </div>
+                                    <span class="order-item-price">$899.00</span>
+                                </div>
+                                <div class="order-item">
+                                    <img src="../images/Apple-Watch.jpeg" alt="Apple Watch" class="order-item-img" onerror="this.src='https://via.placeholder.com/64x64/e2e8f0/64748b?text=No+Image'">
+                                    <div class="order-item-info">
+                                        <h6>Apple Watch Ultra 2</h6>
+                                        <div class="variant">Orange Alpine Loop</div>
+                                        <div class="qty">Qty: 2</div>
+                                    </div>
+                                    <span class="order-item-price">$698.00</span>
+                                </div>
+                                <div class="order-item">
+                                    <img src="../images/Sony.jpeg" alt="Sony" class="order-item-img" onerror="this.src='https://via.placeholder.com/64x64/e2e8f0/64748b?text=No+Image'">
+                                    <div class="order-item-info">
+                                        <h6>Sony WH-1000XM5</h6>
+                                        <div class="variant">Black / Noise Cancelling</div>
+                                        <div class="qty">Qty: 1</div>
+                                    </div>
+                                    <span class="order-item-price">$199.00</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-row"><span class="label">Subtotal</span><span class="value" id="summary-subtotal">$3,095.00</span></div>
+                            <div class="summary-row"><span class="label">Shipping</span><span class="value" id="summary-shipping">Free</span></div>
+                            <div class="summary-row"><span class="label">Tax (5%)</span><span class="value" id="summary-tax">$154.75</span></div>
+                            <div class="summary-row discount" id="discount-row" style="display: none;"><span class="label">Discount</span><span class="value" id="summary-discount">-$0.00</span></div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-total">
+                                <span class="label">Total</span>
+                                <span class="value" id="summary-total">$3,249.75</span>
+                            </div>
+                        </div>
+                        <div style="padding: 0 28px 28px;">
+                            <button class="btn-place-order" id="placeOrderBtn" onclick="placeOrder()">
+                                <i class="bi bi-shield-check"></i> Place Order
+                            </button>
+                            <div class="secure-badge">
+                                <i class="bi bi-shield-lock-fill"></i>
+                                <span>Secure SSL Encrypted Checkout</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-about">
+                        <a href="index.html" class="footer-brand">Hima<span>Tech</span></a>
+                        <p>Your premier destination for laptops, smartphones, accessories, and all things tech. We bring the latest technology to your doorstep in Syria with quality guaranteed.</p>
+                        <div class="social-links">
+                            <a href="404.html" title="Facebook"><i class="bi bi-facebook"></i></a>
+                            <a href="404.html" title="Twitter"><i class="bi bi-twitter-x"></i></a>
+                            <a href="404.html" title="Instagram"><i class="bi bi-instagram"></i></a>
+                            <a href="404.html" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                            <a href="404.html" title="YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i>Home</a></li>
+                        <li><a href="shop.html"><i class="bi bi-chevron-right"></i>Shop</a></li>
+                        <li><a href="categories.html"><i class="bi bi-chevron-right"></i>Categories</a></li>
+                        <li><a href="blog.html"><i class="bi bi-chevron-right"></i>Blog</a></li>
+                        <li><a href="about.html"><i class="bi bi-chevron-right"></i>About Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5>Customer Service</h5>
+                    <ul class="footer-links">
+                        <li><a href="contact.html"><i class="bi bi-chevron-right"></i>Contact Us</a></li>
+                        <li><a href="faq.html"><i class="bi bi-chevron-right"></i>FAQ</a></li>
+                        <li><a href="privacy.html"><i class="bi bi-chevron-right"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="bi bi-chevron-right"></i>Terms of Service</a></li>
+                        <li><a href="#"><i class="bi bi-chevron-right"></i>Track Order</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <h5>Contact Info</h5>
+                    <ul class="footer-links footer-contact">
+                        <li>
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>123 Tech Street, Damascus, Syria</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+963 988 123 456</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>info@himatech-store.com</span>
+                        </li>
+                        <li>
+                            <i class="bi bi-clock-fill"></i>
+                            <span>Sat - Thu: 9:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>All rights reserved. Built with <i class="bi bi-heart-fill text-danger"></i> in Syria. HimaTech-Store &copy;2026 </p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="payment-methods d-flex justify-content-md-end gap-2">
+                            <img src="../images/تنزيل.png" alt="Visa">
+                            <img src="../images/Mastercard.png" alt="MasterCard">
+                            <img src="../images/paypal.png" alt="PayPal">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ===== ORDER SUCCESS MODAL ===== -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-5">
+                    <div class="success-icon">
+                        <i class="bi bi-check-lg"></i>
+                    </div>
+                    <h3 class="fw-bold mb-2">Order Placed Successfully!</h3>
+                    <p class="text-muted mb-1">Thank you for your purchase.</p>
+                    <p class="text-muted mb-4">Order ID: <strong class="text-primary" id="orderId">#HT-2026-78432</strong></p>
+                    <p class="text-muted small mb-4">You will receive an email confirmation shortly with your order details.</p>
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a href="index.html" class="btn btn-primary px-4"><i class="bi bi-house me-2"></i>Back to Home</a>
+                        <a href="shop.html" class="btn btn-outline-primary px-4"><i class="bi bi-shop me-2"></i>Continue Shopping</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        // ===== SCROLL TO TOP =====
+        const scrollTopBtn = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // ===== SEARCH FUNCTIONALITY =====
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query) {
+                showToast('Searching for: ' + query, 'info');
+                setTimeout(() => {
+                    window.location.href = 'shop.html?search=' + encodeURIComponent(query);
+                }, 500);
+            } else {
+                showToast('Please enter a search term', 'error');
+            }
+        }
+
+        document.getElementById('searchInput')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleSearch();
+            }
+        });
+
+        // ===== PAYMENT METHOD SELECTION =====
+        function selectPayment(element, method) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+            element.querySelector('input').checked = true;
+
+            const cardForm = document.getElementById('cardForm');
+            if (method === 'card') {
+                cardForm.style.display = 'block';
+                cardForm.style.animation = 'fadeInUp 0.3s ease';
+            } else {
+                cardForm.style.display = 'none';
+            }
+        }
+
+        // ===== FORM VALIDATION =====
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'address', 'city', 'governorate'];
+
+            requiredFields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (!field.value.trim()) {
+                    field.classList.add('is-invalid');
+                    isValid = false;
+                } else {
+                    field.classList.remove('is-invalid');
+                }
+            });
+
+            const email = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (email.value && !emailRegex.test(email.value)) {
+                email.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            const phone = document.getElementById('phone');
+            if (phone.value && phone.value.length < 8) {
+                phone.classList.add('is-invalid');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        document.querySelectorAll('.form-control, .form-select').forEach(field => {
+            field.addEventListener('input', function() {
+                this.classList.remove('is-invalid');
+            });
+        });
+
+        // ===== PLACE ORDER =====
+        function placeOrder() {
+            if (!validateForm()) {
+                showToast('Please fill in all required fields.', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('placeOrderBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
+
+            setTimeout(function() {
+                const orderId = '#HT-' + new Date().getFullYear() + '-' + Math.floor(10000 + Math.random() * 90000);
+                document.getElementById('orderId').textContent = orderId;
+
+                const modal = new bootstrap.Modal(document.getElementById('successModal'));
+                modal.show();
+
+                btn.disabled = false;
+                btn.innerHTML = '<i class="bi bi-shield-check"></i> Place Order';
+
+                showToast('Your order has been placed successfully!', 'success');
+            }, 2000);
+        }
+
+        // ===== CARD NUMBER FORMATTING =====
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/[^0-9]/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        // ===== TOAST NOTIFICATIONS =====
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let icon = 'bi-info-circle';
+            if (type === 'success') icon = 'bi-check-circle';
+            if (type === 'error') icon = 'bi-x-circle';
+
+            toast.className = 'custom-toast toast-' + type;
+            toast.innerHTML = `
+                <div class="toast-icon"><i class="bi ${icon}"></i></div>
+                <div class="toast-message">${message}</div>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateX(100%)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        // ===== ANIMATE ON SCROLL =====
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.fade-in-up');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // ===== MOBILE MENU CLOSE ON CLICK =====
+        document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                const navbar = document.getElementById('mainNavbar');
+                const bsCollapse = bootstrap.Collapse.getInstance(navbar);
+                if (bsCollapse) {
+                    bsCollapse.hide();
+                }
+            });
+        });
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            animateOnScroll();
+            showToast('Please fill in your shipping details to complete your order.', 'info');
+        });
+    </script>
+</body>
+</html>
