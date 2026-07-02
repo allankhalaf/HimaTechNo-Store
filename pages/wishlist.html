@@ -307,16 +307,16 @@
             color: #fff;
         }
 
-        .product-img {
-            position: relative;
-            overflow: hidden;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #f8fafc;
-            padding: 20px;
-        }
+       .product-img {
+    position: relative;
+    overflow: hidden;
+    height: 280px;        /* غيّر من 220px لـ 280px أو اللي بدك إياه */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8fafc;
+    padding: 0;           /* شيل الـ padding: 20px */
+}
 
         .product-img img {
             max-height: 100%;
@@ -934,7 +934,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <span><i class="bi bi-telephone-fill me-2"></i>+963 xxx xxx xxx</span>
+                    <span><i class="bi bi-telephone-fill me-2"></i>+963 988 123 456</span>
                     <span class="ms-4"><i class="bi bi-envelope-fill me-2"></i>info@himatech-store.com</span>
                 </div>
                 <div class="col-md-6 text-md-end mt-2 mt-md-0">
@@ -1120,7 +1120,7 @@
                         </li>
                         <li>
                             <i class="bi bi-telephone-fill"></i>
-                            <span>+963 xxx xxx xxx</span>
+                            <span>+963 988 123 456</span>
                         </li>
                         <li>
                             <i class="bi bi-envelope-fill"></i>
@@ -1337,21 +1337,23 @@
             }
         ];
 
-        const WISHLIST_KEY = 'himatech_wishlist';
-        const CART_KEY = 'himatech_cart';
+const WISHLIST_KEY = 'himatech_wishlist_v2'; // غيّر الاسم
+const CART_KEY = 'himatech_cart';
 
-        function initWishlist() {
-            const stored = localStorage.getItem(WISHLIST_KEY);
-            if (stored) {
-                wishlistData = JSON.parse(stored);
-            } else {
-                wishlistData = [...demoWishlist];
-                localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlistData));
-            }
-            renderWishlist();
-            renderRecommended();
-            updateCounts();
-        }
+function initWishlist() {
+    const stored = localStorage.getItem(WISHLIST_KEY);
+    
+    if (stored) {
+        wishlistData = JSON.parse(stored);
+    } else {
+        wishlistData = [...demoWishlist];
+        localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlistData));
+    }
+    
+    renderWishlist();
+    renderRecommended();
+    updateCounts();
+}
 
         function saveWishlist() {
             localStorage.setItem(WISHLIST_KEY, JSON.stringify(wishlistData));
