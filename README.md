@@ -1,8 +1,11 @@
 # ⚡ HimaTechNo-Store
 
-## HimaTech Store
+<p align="center">
+  <img src="./images/Hima.jpg" alt="HimaTech Store" width="220">
+</p>
 
-**Your Premier Tech E-Commerce Destination**
+<h2 align="center">HimaTech Store</h2>
+<p align="center"><strong>Your Premier Tech E-Commerce Destination</strong></p>
 
 ---
 
@@ -14,8 +17,7 @@
 
 ## 📌 About the Project
 
-**HimaTechNo-Store** is a modern tech e-commerce graduation project designed to provide a professional online shopping experience for electronics and smart devices.
-The project includes storefront pages, shopping features, and an admin dashboard.
+**HimaTechNo-Store** is a modern tech e-commerce graduation project designed to provide a professional online shopping experience for electronics and smart devices. The project includes storefront pages, shopping features, and an admin dashboard.
 
 ---
 
@@ -52,6 +54,9 @@ The project includes storefront pages, shopping features, and an admin dashboard
 ## 👨‍💻 Author
 
 **Alan Khalaf**
+
+* 🌐 Portfolio: [Alan Khalaf Portfolio](https://allankhalaf.github.io/Alan-Khalaf-cv/)
+* 💻 GitHub: [allankhalaf](https://github.com/allankhalaf)
 
 ---
 
